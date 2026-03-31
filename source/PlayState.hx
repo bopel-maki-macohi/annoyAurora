@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxSubState;
@@ -23,13 +24,17 @@ class PlayState extends FlxState
 	public var transitioning:Bool = false;
 	public var transitionOverlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
-	public var startTime:Date;
+	public var passedSeconds:Int = 0;
+	public var secondsPasser:FlxTimer = new FlxTimer();
 
 	override public function create()
 	{
 		super.create();
 
-		startTime = Date.now();
+		secondsPasser.start(1, t ->
+		{
+			passedSeconds++;
+		}, 0);
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
@@ -114,6 +119,7 @@ class PlayState extends FlxState
 	override function openSubState(SubState:FlxSubState)
 	{
 		transitioning = true;
+		secondsPasser.active = false;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: Constants.TRANSITION_OVERLAYALPHA}, Constants.TRANSITION_SPEED, {
@@ -133,6 +139,7 @@ class PlayState extends FlxState
 	override function closeSubState()
 	{
 		transitioning = false;
+		secondsPasser.active = true;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: 0}, Constants.TRANSITION_SPEED, {
