@@ -25,7 +25,7 @@ class InitState extends FlxState
 		else
 		{
 			trace('JUST UPGRADED!');
-			proceed();
+			FlxG.switchState(() -> new UpgradedState(SaveManager.instance.lastVersion));
 		}
 
 		SaveManager.instance.lastVersion = curVer;
