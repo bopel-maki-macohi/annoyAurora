@@ -10,14 +10,16 @@ import flixel.FlxState;
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
-
 	public var auroraTicked:Float = 0.0;
-
 	public var auroraTickOffBar:FlxBar;
+
+	public var startTime:Date;
 
 	override public function create()
 	{
 		super.create();
+
+		startTime = Date.now();
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
