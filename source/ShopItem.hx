@@ -32,7 +32,10 @@ class ShopItem extends FlxSprite
 			Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - brightnessModif);
 
 			if (FlxG.mouse.justPressed && !disabled)
+			{
+				FlxG.sound.play('assets/shopitem.wav', .25);
 				onClick.dispatch(this);
+			}
 		}
 		else
 		{
