@@ -28,7 +28,7 @@ class ShopItem extends FlxSprite
 			overlapUpdate.dispatch();
 
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? Constants.SPRITE_HOVER_BRIGHTNESSVAL : 0));
+				Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
 
 			if (FlxG.mouse.justPressed && !bought)
 				onClick.dispatch();
@@ -38,7 +38,7 @@ class ShopItem extends FlxSprite
 			nonoverlapUpdate.dispatch();
 
 			if (FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, 1 - ((bought) ? Constants.SPRITE_HOVER_BRIGHTNESSVAL : 0));
+				Constants.setSpriteCT(this, 1 - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
 		}
 	}
 }
