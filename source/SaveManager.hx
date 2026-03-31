@@ -36,7 +36,9 @@ class SaveManager extends FlxBasic
 
 		FlxG.save.bind('AnnoyAurora', 'Maki');
 
+		#if !CLEAR_SAVE
 		loadData();
+		#end
 	}
 
 	public function save()
