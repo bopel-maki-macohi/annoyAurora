@@ -33,7 +33,7 @@ class ShopItem extends FlxSprite
 
 			if (FlxG.mouse.justPressed && !disabled)
 			{
-				FlxG.sound.play('assets/shopItem.wav', .25);
+				FlxG.sound.play('assets/shopItem.wav');
 				onClick.dispatch(this);
 			}
 		}
