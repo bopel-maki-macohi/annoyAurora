@@ -144,12 +144,7 @@ class PlayState extends FlxState
 			#if !DISABLE_VICTORY
 			if (auroraTicked >= Math.round(auroraTickOffBarMaxTarget))
 			{
-				#if !DISABLE_AAC
-				if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MIN_VIOLATIONS)
-					FlxG.switchState(() -> new AntiAutoClickState(true));
-				else
-				#end
-				FlxG.switchState(() -> new WinState());
+				FlxG.switchState(() -> new WinState(#if DISABLE_AAC true #else Math.round(autoClickFlags) < Constants.ANTI_AUTOCLICK_MIN_VIOLATIONS #end));
 			}
 			#end
 
@@ -159,10 +154,10 @@ class PlayState extends FlxState
 			if (autoClickFlags < 0)
 				autoClickFlags = 0;
 
-			#if !DISABLE_AAC
-			if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
-				FlxG.switchState(() -> new AntiAutoClickState());
-			#end
+			// #if !DISABLE_AAC
+			// if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
+			// 	FlxG.switchState(() -> new AntiAutoClickState());
+			// #end
 
 			if (MouseManager.instance.overlaps(aurora))
 			{

@@ -9,6 +9,15 @@ class WinState extends FlxState
 
 	public var text:FlxText = new FlxText();
 
+	public var earnedIt:Bool = false;
+
+	override public function new(earnedIt:Bool)
+	{
+		super();
+
+		this.earnedIt = earnedIt;
+	}
+
 	override function create()
 	{
 		super.create();
@@ -57,12 +66,15 @@ class WinState extends FlxState
 
 		text.text += '\n\nPress ENTER to do it again, you jerk.';
 
+		if (!earnedIt)
+			text.text += '\nAnd this time, don\'t cheat.';
+
 		add(text);
 		text.alignment = CENTER;
 		text.screenCenter();
 		text.y = 10;
 
-		if (!SaveManager.hasEnding(ending))
+		if (!SaveManager.hasEnding(ending) && earnedIt)
 			SaveManager.getEnding(ending);
 
 		MouseManager.instance.visible = false;
