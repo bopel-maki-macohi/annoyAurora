@@ -19,4 +19,6 @@ class Constants
 
 	public static function setSpriteCT(sprite:FlxSprite, ctv:Float)
 		sprite.setColorTransform(ctv, ctv, ctv);
+
+	public static final ANTI_AUTOCLICK_VALUE:Int = 4;
 }

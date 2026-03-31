@@ -27,6 +27,12 @@ class PlayState extends FlxState
 	public var passedSeconds:Int = 0;
 	public var secondsPasser:FlxTimer = new FlxTimer();
 
+	public var clickTick:Int = 0;
+
+	// Anti-autoClicker
+	public var ticksSinceLastClick:Int = 0;
+	public var lastAnnoyanceTick:Int = 0;
+
 	override public function create()
 	{
 		super.create();
@@ -74,6 +80,9 @@ class PlayState extends FlxState
 
 		if (!transitioning)
 		{
+			clickTick++;
+			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
+
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, 1 / 32);
 
 			if (FlxG.mouse.overlaps(aurora))
@@ -82,7 +91,19 @@ class PlayState extends FlxState
 					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 				if (FlxG.mouse.justPressed)
-					auroraTicked += FlxG.random.float(2, 10);
+				{
+					trace('ticksSinceLastClick: $ticksSinceLastClick');
+
+					if (ticksSinceLastClick > Constants.ANTI_AUTOCLICK_VALUE)
+					{
+						lastAnnoyanceTick = clickTick;
+						auroraTicked += FlxG.random.float(2, 10);
+					}
+					else
+					{
+						trace('Flagged as auto-clicking');
+					}
+				}
 			}
 			else
 			{
