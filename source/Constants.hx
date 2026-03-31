@@ -22,4 +22,6 @@ class Constants
 
 	public static final ANTI_AUTOCLICK_VIOLATION_TICK:Int = 4;
 	public static final ANTI_AUTOCLICK_MAX_VIOLATIONS:Float = 16.0;
+	
+	public static final SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET:Float = .25;
 }
