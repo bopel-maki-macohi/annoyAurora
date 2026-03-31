@@ -118,12 +118,14 @@ class PlayState extends FlxState
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: Constants.TRANSITION_OVERLAYALPHA}, Constants.TRANSITION_SPEED, {
-			ease: FlxEase.sineInOut
+			ease: FlxEase.sineIn
 		});
 
 		if (inShop)
 		{
-			FlxTween.tween(shopBtn, {x: 0}, Constants.TRANSITION_SPEED);
+			FlxTween.tween(shopBtn, {x: 0}, Constants.TRANSITION_SPEED, {
+				ease: FlxEase.sineIn
+			});
 		}
 
 		super.openSubState(SubState);
@@ -135,13 +137,15 @@ class PlayState extends FlxState
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: 0}, Constants.TRANSITION_SPEED, {
-			ease: FlxEase.sineInOut
+			ease: FlxEase.sineOut
 		});
 
 		if (inShop)
 		{
 			inShop = false;
-			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED);
+			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED, {
+				ease: FlxEase.sineOut
+			});
 		}
 
 		super.closeSubState();

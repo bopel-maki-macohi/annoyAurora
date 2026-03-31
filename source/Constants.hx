@@ -2,7 +2,7 @@ import flixel.FlxG;
 
 class Constants
 {
-	public static final TRANSITION_SPEED:Float = .5;
+	public static final TRANSITION_SPEED:Float = .25;
 	public static final TRANSITION_OVERLAYALPHA:Float = .3;
 
 	public static var BAR_WIDTH(get, never):Int;
