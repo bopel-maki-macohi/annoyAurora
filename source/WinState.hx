@@ -66,6 +66,8 @@ class WinState extends FlxState
 			SaveManager.getEnding(ending);
 
 		MouseManager.instance.visible = false;
+
+		SaveManager.newGame();
 	}
 
 	override function update(elapsed:Float)
@@ -74,7 +76,6 @@ class WinState extends FlxState
 
 		if (FlxG.keys.justReleased.ENTER)
 		{
-			SaveManager.newGame();
 			FlxG.switchState(() -> new PlayState());
 		}
 	}

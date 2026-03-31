@@ -282,7 +282,7 @@ class PlayState extends FlxState
 			auroraTolerance += (.2 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60;
 		}
 
-		auroraTicked += FlxG.random.float(1, 5) + (.1 * auroraTolerance);
+		auroraTicked += FlxG.random.float(5, 10) + (.1 * auroraTolerance);
 		auroraTolerance += .1;
 
 		aurora.loadGraphic(Constants.getRandomAuroraSprite());

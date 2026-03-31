@@ -1,0 +1,1 @@
+Small patch cause using an auto-clicker doesn't work and it's pretty impossible to actually get the victory.
