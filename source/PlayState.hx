@@ -43,6 +43,8 @@ class PlayState extends FlxState
 		secondsPasser.start(Constants.PASSEDSECONDS_INCREMENT, t ->
 		{
 			passedSeconds += Constants.PASSEDSECONDS_INCREMENT;
+			
+			passedSeconds = FlxMath.roundDecimal(passedSeconds, 2);
 			SaveManager.instance.passedSeconds = passedSeconds;
 		}, 0);
 
