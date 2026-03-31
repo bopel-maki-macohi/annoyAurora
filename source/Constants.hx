@@ -12,7 +12,7 @@ class Constants
 		return Math.round(FlxG.width * 0.8);
 
 	static function get_BAR_HEIGHT():Int
-		return Math.round(FlxG.width * 0.05);
+		return Math.round(FlxG.height * 0.05);
 
 	public static final SPRITE_HOVER_BRIGHTNESSVAL:Float = 1.5;
 }
