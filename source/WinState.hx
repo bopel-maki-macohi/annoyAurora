@@ -58,6 +58,7 @@ class WinState extends FlxState
 		text.text += '\n\nPress anything to do it again, you jerk.';
 
 		add(text);
+		text.alignment = CENTER;
 		text.screenCenter();
 		text.y = 10;
 
