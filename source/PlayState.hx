@@ -236,6 +236,7 @@ class PlayState extends FlxState
 
 		if (inShop)
 		{
+			FlxTween.cancelTweensOf(shopBtn);
 			FlxTween.tween(shopBtn, {x: FlxG.width - (640 - shopBtn.width - 16)}, Constants.TRANSITION_SPEED, {
 				ease: FlxEase.sineIn
 			});
@@ -258,6 +259,7 @@ class PlayState extends FlxState
 		if (inShop)
 		{
 			inShop = false;
+			FlxTween.cancelTweensOf(shopBtn);
 			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED * 0.25, {
 				ease: FlxEase.sineOut
 			});
