@@ -1,8 +1,3 @@
-- Added "New Game" shop item : Resets your game
-- Fixed open but closed shop (weird autoClicker bug)
-- Fixed visible cursor in the upgraded state
-- Added Bonking bat shop item
-    - Added 2 new endings (both have alt text for if you have the "Drunk" or "Drunk (Female)" endings):
-        - "Abuse"
-        - "Abuse (Female)" (This one has extra alt texts cause the ideas made me laugh)
-- FIXED THE OUTDATED STATE I AM SO SORRY
+- Fixed "Abuse (Female)" ending always being set to one of the alt texts
+- The ending sprite for the "Abuse" and "Abuse (Female)" endings are now just scaled down.
+- Upgrade Messages can use "%version%" and it will replace it with the current version

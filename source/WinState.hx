@@ -46,7 +46,6 @@ class WinState extends FlxState
 				ending += '-female';
 
 		sprite.loadGraphic('assets/endings/$ending.png');
-		sprite.screenCenter();
 		add(sprite);
 
 		text.size = 16;
@@ -55,9 +54,9 @@ class WinState extends FlxState
 		switch (ending)
 		{
 			case 'abuse-female':
-				sprite.y += sprite.height / 12;
+				sprite.scale.set(.75, .75);
 
-				if (FlxG.random.bool(15) || true)
+				if (FlxG.random.bool(15))
 				{
 					sprite.y += sprite.height / 12;
 					text.text += 'In the nicest way possible.\nI wish you die single.';
@@ -75,15 +74,12 @@ class WinState extends FlxState
 				}
 
 			case 'abuse':
-				sprite.y += sprite.height / 12;
+				sprite.scale.set(.75, .75);
 
 				if (SaveManager.hasEnding('drunk') && SaveManager.hasItem('beer'))
 					text.text += 'I WAS JOKING DUDE. WHAT THE FUCK';
 				else
-				{
-					sprite.y += sprite.height / 12;
 					text.text += 'You are the reason searching up\n"My boyfriend is abusing me"\nleads to a hotline on google.';
-				}
 
 			case 'female':
 				text.text += 'You are now an asshole transgender.';
@@ -102,6 +98,8 @@ class WinState extends FlxState
 
 		if (!earnedIt)
 			text.text += '\nAnd this time, don\'t cheat.';
+
+		sprite.screenCenter();
 
 		add(text);
 		text.alignment = CENTER;

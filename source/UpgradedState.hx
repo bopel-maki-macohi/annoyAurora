@@ -3,6 +3,8 @@ import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxState;
 
+using StringTools;
+
 class UpgradedState extends FlxState
 {
 	public var lastVersion:String = '0.0.0';
@@ -28,10 +30,12 @@ class UpgradedState extends FlxState
 		var message = new FlxText(0, 0, 0, '', 16);
 		add(message);
 
-		message.text += 'Welcome to version ${FlxG.stage.application.meta.get('version')}!'
+		message.text += 'Welcome to version %version%!'
 			+ '\n\n'
 			+ upgradeMessage
 			+ '\n\nPress ENTER to go to gameplay lol';
+
+		message.text = message.text.replace('%version%', Main.currentVersion);
 
 		message.alignment = CENTER;
 		message.screenCenter();
