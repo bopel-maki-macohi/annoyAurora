@@ -62,7 +62,7 @@ class PlayState extends FlxState
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 		aurora.loadGraphic('assets/aurora.png');
-		auroraSpriteChangeTimer.start(2, t -> aurora.loadGraphic('assets/aurora.png'), 0);
+		auroraSpriteChangeTimer.start(1, t -> aurora.loadGraphic('assets/aurora.png'), 0);
 
 		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
@@ -279,6 +279,8 @@ class PlayState extends FlxState
 		auroraTolerance += .1;
 
 		aurora.loadGraphic(Constants.getRandomAuroraSprite());
+		if (auroraSpriteChangeTimer.timeLeft < .2)
+			auroraSpriteChangeTimer.reset();
 	}
 
 	public function auroraTickedLerpRatio():Float
