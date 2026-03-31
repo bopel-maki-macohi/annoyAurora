@@ -11,6 +11,7 @@ class UpdateUtil
 	public static function checkForUpdate():Bool
 	{
 		#if hl
+		latestVersion = Main.currentVersion;
 		return false;
 		#end
 
