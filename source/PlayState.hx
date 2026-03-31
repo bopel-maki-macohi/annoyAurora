@@ -147,7 +147,7 @@ class PlayState extends FlxState
 		if (inShop)
 		{
 			inShop = false;
-			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED, {
+			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED * 0.25, {
 				ease: FlxEase.sineOut
 			});
 		}

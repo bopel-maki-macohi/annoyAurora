@@ -1,0 +1,1 @@
+- Fix shop substate not having a transition when being closed :(
