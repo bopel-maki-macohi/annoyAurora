@@ -39,9 +39,11 @@ class PlayState extends FlxState
 	{
 		super.create();
 
+		passedSeconds = SaveManager.instance.passedSeconds;
 		secondsPasser.start(1, t ->
 		{
 			passedSeconds++;
+			SaveManager.instance.passedSeconds = passedSeconds;
 		}, 0);
 
 		FlxG.camera.bgColor = FlxColor.WHITE;

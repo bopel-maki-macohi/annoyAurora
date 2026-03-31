@@ -10,6 +10,8 @@ class SaveManager extends FlxBasic
 
 	public var beerTicks:Float = 0;
 
+	public var passedSeconds:Int = 0;
+
 	override public function new()
 	{
 		super();
@@ -60,7 +62,7 @@ class SaveManager extends FlxBasic
 
 	public function saveFieldFunction(f:String->Void)
 	{
-		for (field in ['boughtItems', 'beerTicks'])
+		for (field in ['boughtItems', 'beerTicks', 'passedSeconds'])
 			f(field);
 	}
 
