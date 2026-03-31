@@ -44,10 +44,7 @@ class PlayState extends FlxState
 		aurora.screenCenter();
 		aurora.y = FlxG.height - aurora.height;
 
-		final barWidth = Math.round(FlxG.width * 0.8);
-		final barHeight = Math.round(FlxG.height * 0.05);
-
-		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, barWidth, barHeight, this, 'auroraTicked', 0, 100);
+		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
 		auroraTickOffBar.createFilledBar(FlxColor.RED, FlxColor.LIME, true, FlxColor.BLACK, 4);
 
@@ -66,6 +63,11 @@ class PlayState extends FlxState
 		add(shopBtn);
 	}
 
+	public function setSpriteCT(sprite:FlxSprite, ctv:Float)
+	{
+		sprite.setColorTransform(ctv, ctv, ctv);
+	}
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -77,7 +79,7 @@ class PlayState extends FlxState
 			if (FlxG.mouse.overlaps(aurora))
 			{
 				if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
-					aurora.setColorTransform(1.5, 1.5, 1.5);
+					setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 				if (FlxG.mouse.justPressed)
 					auroraTicked += FlxG.random.float(2, 10);
@@ -85,32 +87,28 @@ class PlayState extends FlxState
 			else
 			{
 				if (FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
-					aurora.setColorTransform(1, 1, 1);
+					setSpriteCT(aurora, 1);
 			}
 		}
 
 		if (FlxG.mouse.overlaps(shopBtn))
 		{
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
-				shopBtn.setColorTransform(1.5, 1.5, 1.5);
+				setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 			if (FlxG.mouse.justPressed)
-			{
 				if (!inShop)
 				{
 					inShop = true;
 					openSubState(new ShopSubState());
 				}
 				else
-				{
 					closeSubState();
-				}
-			}
 		}
 		else
 		{
 			if (FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
-				shopBtn.setColorTransform(1, 1, 1);
+				setSpriteCT(shopBtn, 1);
 		}
 	}
 
@@ -119,13 +117,13 @@ class PlayState extends FlxState
 		transitioning = true;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
-		FlxTween.tween(transitionOverlay, {alpha: 0.6}, 1, {
+		FlxTween.tween(transitionOverlay, {alpha: Constants.TRANSITION_OVERLAYALPHA}, Constants.TRANSITION_SPEED, {
 			ease: FlxEase.sineInOut
 		});
 
 		if (inShop)
 		{
-			FlxTween.tween(shopBtn, {x: 0}, 1);
+			FlxTween.tween(shopBtn, {x: 0}, Constants.TRANSITION_SPEED);
 		}
 
 		super.openSubState(SubState);
@@ -136,14 +134,14 @@ class PlayState extends FlxState
 		transitioning = false;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
-		FlxTween.tween(transitionOverlay, {alpha: 0}, 1, {
+		FlxTween.tween(transitionOverlay, {alpha: 0}, Constants.TRANSITION_SPEED, {
 			ease: FlxEase.sineInOut
 		});
 
 		if (inShop)
 		{
 			inShop = false;
-			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, 1);
+			FlxTween.tween(shopBtn, {x: FlxG.width - shopBtn.width}, Constants.TRANSITION_SPEED);
 		}
 
 		super.closeSubState();
