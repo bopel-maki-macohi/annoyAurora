@@ -87,6 +87,16 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
+		for (field in [
+			'auroraTickOffBarMaxTarget',
+			'clickTick',
+			'ticksSinceLastClick',
+			'autoClickFlags',
+			'lastAnnoyanceTick',
+			'passedSeconds'
+		])
+			FlxG.watch.addQuick(field, Reflect.field(this, field));
 
 		auroraTickOffBarMaxTarget = 100;
 
@@ -101,15 +111,6 @@ class PlayState extends FlxState
 		{
 			if (SaveManager.instance.beerTicks > 0)
 				SaveManager.instance.beerTicks -= 0.25;
-
-			for (field in [
-				'auroraTickOffBarMaxTarget',
-				'clickTick',
-				'ticksSinceLastClick',
-				'autoClickFlags',
-				'lastAnnoyanceTick'
-			])
-				FlxG.watch.addQuick(field, Reflect.field(this, field));
 
 			setAuroraScale(FlxMath.lerp(aurora.scale.x, 1, 1 / 32), FlxMath.lerp(aurora.scale.y, 1, 1 / 32));
 
