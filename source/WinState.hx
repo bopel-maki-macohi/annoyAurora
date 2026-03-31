@@ -54,7 +54,8 @@ class WinState extends FlxState
 		switch (ending)
 		{
 			case 'abuse-female':
-				sprite.scale.set(.75, .75);
+				sprite.scale.set(.5, .5);
+				sprite.updateHitbox();
 
 				if (FlxG.random.bool(15))
 				{
@@ -74,7 +75,8 @@ class WinState extends FlxState
 				}
 
 			case 'abuse':
-				sprite.scale.set(.75, .75);
+				sprite.scale.set(.5, .5);
+				sprite.updateHitbox();
 
 				if (SaveManager.hasEnding('drunk') && SaveManager.hasItem('beer'))
 					text.text += 'I WAS JOKING DUDE. WHAT THE FUCK';
