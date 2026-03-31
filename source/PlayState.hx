@@ -15,6 +15,8 @@ import flixel.FlxState;
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
+	public var auroraSpriteChangeTimer:FlxTimer = new FlxTimer();
+
 	public var auroraTicked:Float = 0.0;
 	public var auroraTickOffBar:FlxBar;
 	public var auroraTickOffBarMaxTarget:Float = 100;
@@ -60,6 +62,7 @@ class PlayState extends FlxState
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 		aurora.loadGraphic('assets/aurora.png');
+		auroraSpriteChangeTimer.start(2, t -> aurora.loadGraphic('assets/aurora.png'), 0);
 
 		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
@@ -274,6 +277,8 @@ class PlayState extends FlxState
 
 		auroraTicked += FlxG.random.float(1, 5) + (.1 * auroraTolerance);
 		auroraTolerance += .1;
+
+		aurora.loadGraphic(Constants.getRandomAuroraSprite());
 	}
 
 	public function auroraTickedLerpRatio():Float

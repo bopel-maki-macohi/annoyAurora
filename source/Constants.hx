@@ -45,4 +45,16 @@ class Constants
 	{
 		FlxG.sound.play(AUDIO_AURORA_NOISES[FlxG.random.int(0, AUDIO_AURORA_NOISES.length - 1)], .25);
 	}
+
+	public static var SPRITES_AURORA(get, never):Array<String>;
+
+	static function get_SPRITES_AURORA():Array<String>
+	{
+		return Assets.list().filter(p -> return p.startsWith('assets/auroras/'));
+	}
+
+	public static function getRandomAuroraSprite()
+	{
+		return SPRITES_AURORA[FlxG.random.int(0, SPRITES_AURORA.length - 1)];
+	}
 }
