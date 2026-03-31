@@ -12,6 +12,8 @@ class SaveManager extends FlxBasic
 
 	public var passedSeconds:Float = 0;
 
+	public var endings:Array<String> = [];
+
 	override public function new()
 	{
 		super();
@@ -62,8 +64,24 @@ class SaveManager extends FlxBasic
 
 	public function saveFieldFunction(f:String->Void)
 	{
-		for (field in ['boughtItems', 'beerTicks', 'passedSeconds'])
+		for (field in ['boughtItems', 'beerTicks', 'passedSeconds', 'endings'])
 			f(field);
+	}
+
+	public static function getEnding(ending:String)
+	{
+		if (instance == null)
+			return;
+
+		instance.endings.push(ending);
+	}
+
+	public static function hasEnding(ending:String):Bool
+	{
+		if (instance == null)
+			return false;
+
+		return instance.endings.contains(ending);
 	}
 
 	public static function sellItem(item:String)

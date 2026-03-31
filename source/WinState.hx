@@ -23,5 +23,8 @@ class WinState extends FlxState
         add(text);
         text.screenCenter();
         text.y = 10;
+
+        if (!SaveManager.hasEnding(ending))
+            SaveManager.getEnding(ending);
 	}
 }
