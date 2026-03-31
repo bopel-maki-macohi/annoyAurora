@@ -12,6 +12,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
+using StringTools;
+
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
@@ -99,7 +101,8 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
-		MouseManager.instance.reset();
+		if (!MouseManager.instance.mouseAsset.startsWith('click-'))
+			MouseManager.instance.reset();
 
 		for (field in [
 			'passedSeconds',
@@ -163,8 +166,6 @@ class PlayState extends FlxState
 
 			if (MouseManager.instance.overlaps(aurora))
 			{
-				MouseManager.instance.hover();
-
 				if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
 					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL - .4);
 
@@ -201,8 +202,6 @@ class PlayState extends FlxState
 
 		if (MouseManager.instance.overlaps(shopBtn))
 		{
-			MouseManager.instance.hover();
-
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
 				Constants.setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 

@@ -1,7 +1,10 @@
+import lime.utils.Assets;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import flixel.FlxG;
 import flixel.FlxBasic;
+
+using StringTools;
 
 class MouseManager extends FlxBasic
 {
@@ -27,21 +30,37 @@ class MouseManager extends FlxBasic
 		super.update(elapsed);
 
 		FlxG.mouse.visible = visible;
+
+		if (pressed && !mouseAsset.startsWith('click-'))
+			setMouseAsset('click-$mouseAsset', FlxPoint.get(-32, -32));
+		else if (!pressed && mouseAsset.startsWith('click-'))
+			reset();
 	}
 
-	var mouseAsset:String = '';
+	public var mouseAsset:String = '';
 
 	public function setMouseAsset(asset:String, offsets:FlxPoint)
 	{
 		if (mouseAsset == asset)
 			return;
 
-		FlxG.mouse.load('assets/cursor/$asset.png', 1, Math.round(offsets.x), Math.round(offsets.y));
+		if (!Assets.exists('assets/cursor/$asset.png'))
+		{
+			reset();
+			return;
+		}
+
+		mouseAsset = asset;
+		FlxG.mouse.load('assets/cursor/$mouseAsset.png', 1, Math.round(offsets.x), Math.round(offsets.y));
 	}
 
 	public function overlaps(obj:FlxObject)
 	{
 		final overlapz = FlxG.mouse.overlaps(obj);
+
+		if (overlapz)
+			if (!mouseAsset.startsWith('click-'))
+				hover();
 
 		return overlapz;
 	}
@@ -65,4 +84,9 @@ class MouseManager extends FlxBasic
 
 	function get_justReleased():Bool
 		return FlxG.mouse.justReleased;
+
+	public var pressed(get, never):Bool;
+
+	function get_pressed():Bool
+		return FlxG.mouse.pressed;
 }
