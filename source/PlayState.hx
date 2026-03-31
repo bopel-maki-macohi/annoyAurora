@@ -97,7 +97,7 @@ class PlayState extends FlxState
 			if (autoClickFlags < 0)
 				autoClickFlags = 0;
 
-			if (autoClickFlags >= Constants.ANTI_AUTOCLICK_TSLA_VALUE)
+			if (autoClickFlags >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
 			{
 				autoClickFlags = Math.round(autoClickFlags);
 				FlxG.switchState(() -> new AntiAutoClickState());
@@ -112,14 +112,14 @@ class PlayState extends FlxState
 				{
 					trace('ticksSinceLastClick: $ticksSinceLastClick');
 
-					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_TSLA_VALUE)
+					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_VIOLATION_TICK)
 					{
 						lastAnnoyanceTick = clickTick;
 						auroraTicked += FlxG.random.float(2, 10);
 					}
 					else
 					{
-						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_TSLA_VALUE})');
+						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VIOLATION_TICK})');
 						autoClickFlags += 1.0;
 					}
 				}
