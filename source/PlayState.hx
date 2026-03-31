@@ -222,7 +222,7 @@ class PlayState extends FlxState
 
 		if (inShop)
 		{
-			FlxTween.tween(shopBtn, {x: #if MOBILE_BUILD FlxG.width - (640 - shopBtn.width - 16) #else 0 #end}, Constants.TRANSITION_SPEED, {
+			FlxTween.tween(shopBtn, {x: FlxG.width - (640 - shopBtn.width - 16)}, Constants.TRANSITION_SPEED, {
 				ease: FlxEase.sineIn
 			});
 		}
