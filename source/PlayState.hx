@@ -165,7 +165,9 @@ class PlayState extends FlxState
 
 						setAuroraScale(1.05, 0.95);
 
+						#if AURORA_NOISES_DONT_SOUND_LIKE_SEX
 						Constants.playRandomAuroraNoise();
+						#end
 					}
 					else
 					{
