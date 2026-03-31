@@ -94,13 +94,14 @@ class ShopSubState extends FlxSubState
 		beer.bought = SaveManager.hasItem('beer');
 		shopItems.add(beer);
 		
-		var newgame:ShopItem = new ShopItem('newgame', changeGender.x, changeGender.y - (changeGender.height * 2));
+		var newgame:ShopItem = new ShopItem('newgame', changeGender.x, shopBoard.height);
 		newgame.overlapUpdate.add(item -> setSIText('New game'));
 		newgame.onClick.add(function(item)
 		{
 			SaveManager.newGame();
 			FlxG.resetState();
 		});
+		newgame.y -= newgame.height / 1.5;
 		shopItems.add(newgame);
 	}
 }
