@@ -1,3 +1,4 @@
+import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -26,5 +27,7 @@ class WinState extends FlxState
 
         if (!SaveManager.hasEnding(ending))
             SaveManager.getEnding(ending);
+
+        FlxG.mouse.visible = false;
 	}
 }
