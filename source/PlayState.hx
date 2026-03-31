@@ -49,11 +49,9 @@ class PlayState extends FlxState
 		persistentDraw = true;
 		persistentUpdate = true;
 
-		aurora.makeGraphic(256, 512, FlxColor.LIME);
+		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
-
-		aurora.screenCenter();
-		aurora.y = FlxG.height - aurora.height;
+		aurora.loadGraphic('assets/aurora.png');
 
 		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
@@ -74,6 +72,16 @@ class PlayState extends FlxState
 		add(shopBtn);
 	}
 
+	public function setAuroraScale(x:Float, y:Float)
+	{
+		aurora.scale.x = x;
+		aurora.scale.y = y;
+		aurora.updateHitbox();
+
+		aurora.screenCenter();
+		aurora.y = FlxG.height - aurora.height;
+	}
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -88,6 +96,8 @@ class PlayState extends FlxState
 		{
 			for (field in ['clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
 				FlxG.watch.addQuick(field, Reflect.field(this, field));
+
+			setAuroraScale(FlxMath.lerp(aurora.scale.x, 1, 1 / 32), FlxMath.lerp(aurora.scale.y, 1, 1 / 32));
 
 			clickTick++;
 			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
@@ -106,7 +116,7 @@ class PlayState extends FlxState
 			if (FlxG.mouse.overlaps(aurora))
 			{
 				if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
-					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
+					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL - .4);
 
 				if (FlxG.mouse.justPressed)
 				{
@@ -116,6 +126,8 @@ class PlayState extends FlxState
 					{
 						lastAnnoyanceTick = clickTick;
 						addAuroraTick();
+						
+						setAuroraScale(1.05, 0.95);
 					}
 					else
 					{
