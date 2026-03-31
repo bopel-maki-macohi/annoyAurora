@@ -17,6 +17,8 @@
 
 	<define name="SCREENSHOT_PLUGIN" if="desktop"/>
 
+	<icon path="./dev/icon.png" />
+
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Annoy Aurora" file="AnnoyAurora" main="Main" version="1.0.0" company="Maki" />
