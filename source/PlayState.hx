@@ -21,6 +21,7 @@ class PlayState extends FlxState
 	public var auroraTolerance:Float = 0.0;
 
 	public static var shopBtn:FlxSprite;
+
 	public var inShop:Bool = false;
 
 	public var transitioning:Bool = false;
@@ -132,13 +133,17 @@ class PlayState extends FlxState
 
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, auroraTickedLerpRatio());
 
+			#if !DISABLE_VICTORY
 			if (auroraTicked >= Math.round(auroraTickOffBarMaxTarget))
 			{
+				#if !DISABLE_AAC
 				if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MIN_VIOLATIONS)
 					FlxG.switchState(() -> new AntiAutoClickState(true));
 				else
-					FlxG.switchState(() -> new WinState());
+				#end
+				FlxG.switchState(() -> new WinState());
 			}
+			#end
 
 			if (autoClickFlags > 0)
 				autoClickFlags -= 0.1;
@@ -146,8 +151,10 @@ class PlayState extends FlxState
 			if (autoClickFlags < 0)
 				autoClickFlags = 0;
 
+			#if !DISABLE_AAC
 			if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
 				FlxG.switchState(() -> new AntiAutoClickState());
+			#end
 
 			if (FlxG.mouse.overlaps(aurora))
 			{
@@ -265,7 +272,7 @@ class PlayState extends FlxState
 			auroraTolerance -= .05;
 		}
 
-		auroraTicked += FlxG.random.float(1, 5) + (1 * auroraTolerance);
+		auroraTicked += FlxG.random.float(1, 5) + (.1 * auroraTolerance);
 		auroraTolerance += .1;
 	}
 
