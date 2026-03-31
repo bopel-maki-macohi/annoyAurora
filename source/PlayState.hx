@@ -21,7 +21,7 @@ class PlayState extends FlxState
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
-		FlxG.mouse.load('assets/cursor.png', 1, 32, 32);
+		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
 
 		aurora.makeGraphic(256, 512, FlxColor.LIME);
 		add(aurora);
