@@ -94,7 +94,7 @@ class PlayState extends FlxState
 				{
 					trace('ticksSinceLastClick: $ticksSinceLastClick');
 
-					if (ticksSinceLastClick > Constants.ANTI_AUTOCLICK_VALUE)
+					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_VALUE)
 					{
 						lastAnnoyanceTick = clickTick;
 						auroraTicked += FlxG.random.float(2, 10);
