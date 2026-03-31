@@ -20,9 +20,10 @@ class AntiAutoClickState extends FlxState
 			+ '\nturn off your autoclicker, please.'
 			+ '\n\nIf this was a false positive...'
 			+ '\nI\'m impressed by your speed, and sorry :(';
-		message.screenCenter();
 
         message.color = FlxColor.RED;
+		message.alignment = CENTER;
+		message.screenCenter();
 
         FlxG.sound.playMusic('assets/cheater.wav');
 	}
