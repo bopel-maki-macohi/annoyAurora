@@ -168,7 +168,7 @@ class PlayState extends FlxState
 						#if AURORA_NOISES_DONT_SOUND_LIKE_SEX
 						Constants.playRandomAuroraNoise();
 						#else
-						FlxG.sound.play('assets/Pickup_coin 5.wav', .25);
+						FlxG.sound.play('assets/auroratempnoise.wav', .25);
 						#end
 					}
 					else
