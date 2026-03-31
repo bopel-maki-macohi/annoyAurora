@@ -20,7 +20,7 @@ class PlayState extends FlxState
 	public var auroraTickOffBarMaxTarget:Float = 100;
 	public var auroraTolerance:Float = 0.0;
 
-	public var shopBtn:FlxSprite = new FlxSprite();
+	public static var shopBtn:FlxSprite;
 	public var inShop:Bool = false;
 
 	public var transitioning:Bool = false;
@@ -222,7 +222,7 @@ class PlayState extends FlxState
 
 		if (inShop)
 		{
-			FlxTween.tween(shopBtn, {x: 0}, Constants.TRANSITION_SPEED, {
+			FlxTween.tween(shopBtn, {x: #if MOBILE_BUILD FlxG.width - (640 - shopBtn.width - 16) #else 0 #end}, Constants.TRANSITION_SPEED, {
 				ease: FlxEase.sineIn
 			});
 		}

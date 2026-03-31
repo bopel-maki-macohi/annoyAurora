@@ -19,8 +19,6 @@ class ShopSubState extends FlxSubState
 	{
 		super.create();
 
-		closeCallback = onClose;
-
 		add(shopBoard);
 		shopBoard.screenCenter();
 		shopBoard.x = FlxG.width + shopBoard.width;
@@ -29,28 +27,15 @@ class ShopSubState extends FlxSubState
 
 		addItems();
 
-		FlxTween.tween(shopBoard, {x: 48}, Constants.TRANSITION_SPEED, {
-			ease: FlxEase.sineIn
-		});
-
 		shopItemText.size = 16;
 		shopItemText.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
 		add(shopItemText);
 	}
 
-	public function onClose()
-	{
-		FlxTween.tween(shopBoard, {x: FlxG.width + shopBoard.width}, Constants.TRANSITION_SPEED, {
-			ease: FlxEase.sineOut,
-			onComplete: function(t)
-			{
-				this.destroy();
-			}
-		});
-	}
-
 	override function update(elapsed:Float)
 	{
+		shopBoard.x = PlayState.shopBtn.x + PlayState.shopBtn.width;
+
 		setSIText('');
 
 		super.update(elapsed);
