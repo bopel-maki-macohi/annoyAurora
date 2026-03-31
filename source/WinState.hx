@@ -36,6 +36,9 @@ class WinState extends FlxState
 		if (SaveManager.hasItem('beer') || winstateDefineRandom())
 			ending = 'drunk';
 
+		if (SaveManager.hasItem('bonkingBat') || winstateDefineRandom())
+			ending = 'abuse';
+
 		if (SaveManager.hasItem('changeGender') || winstateDefineRandom())
 			if (ending == 'normal')
 				ending = 'female';
@@ -51,6 +54,27 @@ class WinState extends FlxState
 		text.text = 'Congrats!\nYou won in ${SaveManager.instance.passedSeconds} seconds!\n\n';
 		switch (ending)
 		{
+			case 'abuse-female':
+				if (FlxG.random.bool(15))
+					text.text += 'In the nicest way possible.\nI wish you die single.';
+				else if (FlxG.random.bool(8))
+					text.text += 'I wish you a miscarrage.';
+				else if (FlxG.random.bool(1))
+					text.text += '<nicom>"Ow."<nicom>';
+				else
+				{
+					if (SaveManager.hasEnding('drunk') && SaveManager.hasItem('beer'))
+						text.text += 'GIRL. I WAS JOKIN\'.\nWHAT THE FUCK';
+					else
+						text.text += 'Girl you got problems.';
+				}
+
+			case 'abuse':
+				if (SaveManager.hasEnding('drunk') && SaveManager.hasItem('beer'))
+					text.text += 'I WAS JOKING DUDE. WHAT THE FUCK';
+				else
+					text.text += 'You are the reason searching up\n"My boyfriend is abusing me"\nleads to a hotline on google.';
+
 			case 'female':
 				text.text += 'You are now an asshole transgender.';
 
@@ -73,6 +97,8 @@ class WinState extends FlxState
 		text.alignment = CENTER;
 		text.screenCenter();
 		text.y = 10;
+
+		text.applyMarkup(text.text, [new FlxTextFormatMarkerPair(new FlxTextFormat(0x32825E), '<nicom>')]);
 
 		if (!SaveManager.hasEnding(ending) && earnedIt)
 			SaveManager.getEnding(ending);
