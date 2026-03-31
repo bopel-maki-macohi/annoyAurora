@@ -35,6 +35,8 @@ class UpgradedState extends FlxState
 
 		message.alignment = CENTER;
 		message.screenCenter();
+		
+		MouseManager.instance.visible = false;
 	}
 
 	override function update(elapsed:Float)

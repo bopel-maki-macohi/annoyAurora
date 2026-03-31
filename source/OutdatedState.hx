@@ -17,7 +17,7 @@ class OutdatedState extends FlxState
 
 		message.alignment = CENTER;
 		message.screenCenter();
-
+		
 		MouseManager.instance.visible = false;
 	}
 
@@ -29,7 +29,7 @@ class OutdatedState extends FlxState
 		{
 			if (FlxG.keys.justReleased.ESCAPE)
 				FlxG.openURL('https://github.com/bopel-maki-macohi/annoyAurora/releases');
-			
+
 			InitState.proceed();
 		}
 	}

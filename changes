@@ -1,2 +1,3 @@
 - Added "New Game" shop item : Resets your game
 - Fixed open but closed shop (weird autoClicker bug)
+- Fixed visible cursor in the upgraded state
