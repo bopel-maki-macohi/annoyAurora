@@ -10,7 +10,7 @@ class InitState extends FlxState
 
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
-		
+
 		ScreenshotPlugin.init();
 
 		MouseManager.instance = new MouseManager();
@@ -41,11 +41,12 @@ class InitState extends FlxState
 
 	public static function proceed()
 	{
-		if (UpdateUtil.latestVersion != SaveManager.instance.lastVersion)
-		{
-			FlxG.switchState(() -> new OutdatedState());
-			return;
-		}
+		if (!OutdatedState.seen)
+			if (UpdateUtil.latestVersion != SaveManager.instance.lastVersion)
+			{
+				FlxG.switchState(() -> new OutdatedState());
+				return;
+			}
 
 		#if WINSTATE
 		FlxG.switchState(() -> new WinState());
