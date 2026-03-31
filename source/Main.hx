@@ -17,6 +17,8 @@ class Main extends Sprite
 	{
 		super();
 
+		CrashHandler.initialize();
+
 		// Set the current working directory for Android and iOS devices
 		#if android
 		// On Android use External Files Dir.

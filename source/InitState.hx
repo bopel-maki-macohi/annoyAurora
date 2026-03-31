@@ -18,6 +18,9 @@ class InitState extends FlxState
 			SaveManager.instance.save();
 		});
 
+		if (!FlxG.signals.postUpdate.has(postUpdate))
+			FlxG.signals.postUpdate.add(postUpdate);
+
 		UpdateUtil.checkForUpdate();
 
 		if (UpdateUtil.latestVersion != Main.currentVersion)
@@ -42,5 +45,12 @@ class InitState extends FlxState
 		#else
 		FlxG.switchState(() -> new PlayState());
 		#end
+	}
+
+	function postUpdate()
+	{
+		if (FlxG.keys.pressed.F3)
+			if (FlxG.keys.justPressed.C)
+				throw 'Debug Crash';
 	}
 }

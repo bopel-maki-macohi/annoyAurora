@@ -6,6 +6,15 @@
 
 	<define name="MOBILE_BUILD" if="mobile || MOBILE_TEST"/>
 
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE" />
+	
+	<!-- hxcpp-debug-server will define it anyway -->
+	<!-- <haxedef name="HXCPP_DEBUGGER" if="debug"/> -->
+
+	<haxedef name="openfl-enable-handle-error" />
+
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Annoy Aurora" file="AnnoyAurora" main="Main" version="1.0.0" company="Maki" />
