@@ -15,16 +15,35 @@ class WinState extends FlxState
 
 		var ending:String = 'normal';
 
+		if (SaveManager.hasItem('beer'))
+			ending = 'drunk';
+
+		if (SaveManager.hasItem('changeGender'))
+			if (ending == 'normal')
+				ending = 'female';
+			else
+				ending += '-female';
+
 		sprite.loadGraphic('assets/endings/$ending.png');
 		sprite.screenCenter();
 		add(sprite);
 
 		text.size = 16;
 
+		text.text = 'Congrats!\n';
 		switch (ending)
 		{
+			case 'female':
+				text.text += 'You are an asshole transgender.';
+
+			case 'drunk-female':
+				text.text += 'You\'re a drunk transgender jerk.';
+
+			case 'drunk':
+				text.text += 'You are now another drunk asshole boyfriend that no one likes.';
+
 			default:
-				text.text = 'Congrats! You are... kinda an asshole...';
+				text.text += 'You are...\nkinda just an asshole now...';
 		}
 
 		text.text += '\n\nPress anything to do it again, you jerk.';
@@ -45,7 +64,7 @@ class WinState extends FlxState
 
 		if (FlxG.keys.justReleased.ANY)
 		{
-            SaveManager.newGame();
+			SaveManager.newGame();
 			FlxG.switchState(() -> new PlayState());
 		}
 	}
