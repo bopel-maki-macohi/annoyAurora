@@ -96,7 +96,7 @@ class ShopSubState extends FlxSubState
 		shopItems.add(changeGender);
 
 		var beer:ShopItem = new ShopItem('beer', changeGender.x + (changeGender.width * 2), changeGender.y);
-		beer.overlapUpdate.add(item -> setSIText('BEER!'));
+		beer.overlapUpdate.add(item -> setSIText('BEER! (${2 - SaveManager.countBoughtItem('beer')} left in stock)'));
 		beer.onClick.add(function(item)
 		{
 			if (SaveManager.countBoughtItem('beer') < 2)
