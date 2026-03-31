@@ -10,9 +10,13 @@ class ShopItem extends FlxSprite
 	public var overlapUpdate:FlxSignal = new FlxSignal();
 	public var nonoverlapUpdate:FlxSignal = new FlxSignal();
 
-	override public function new(item:String, ?x:Float, ?y:Float)
+	public var bought:Bool = false;
+
+	override public function new(item:String, bought:Bool, ?x:Float, ?y:Float)
 	{
 		super(x, y, 'assets/shop/$item.png');
+
+		this.bought = bought;
 	}
 
 	override function update(elapsed:Float)
@@ -24,9 +28,9 @@ class ShopItem extends FlxSprite
 			overlapUpdate.dispatch();
 
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
+				Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? .25 : 0));
 
-			if (FlxG.mouse.justPressed)
+			if (FlxG.mouse.justPressed && !bought)
 				onClick.dispatch();
 		}
 		else

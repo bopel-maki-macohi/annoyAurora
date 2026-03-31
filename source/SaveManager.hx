@@ -1,0 +1,80 @@
+import flixel.FlxG;
+import flixel.FlxBasic;
+
+class SaveManager extends FlxBasic
+{
+	public static var instance:SaveManager = null;
+
+	public var boughtItems:Array<String> = [];
+
+	public static function hasItem(item:String):Int
+	{
+		if (instance == null)
+			return 0;
+
+		if (!instance.boughtItems.contains(item))
+			return 0;
+		else
+			return instance.boughtItems.filter(f -> return f == item).length;
+	}
+
+	public static function buyItem(item:String)
+	{
+		if (instance == null)
+			return;
+
+		instance.boughtItems.push(item);
+	}
+
+	override public function new()
+	{
+		super();
+
+		FlxG.save.bind('AnnoyAurora', 'Maki');
+
+		loadData();
+
+		FlxG.stage.application.onExit.add(l -> save);
+	}
+
+	public function save()
+	{
+		saveData();
+
+		FlxG.save.flush();
+	}
+
+	public function loadData()
+	{
+		saveFieldFunction(f ->
+		{
+			switch (f)
+			{
+				default:
+					Reflect.setField(this, f, Reflect.field(FlxG.save.data, f));
+			}
+		});
+
+		trace('Loaded savedata: ${FlxG.save.data}');
+	}
+
+	public function saveData()
+	{
+		saveFieldFunction(f ->
+		{
+			switch (f)
+			{
+				default:
+					Reflect.setField(FlxG.save.data, f, Reflect.field(this, f));
+			}
+		});
+
+		trace('Saved savedata: ${FlxG.save.data}');
+	}
+
+	public function saveFieldFunction(f:String->Void)
+	{
+		for (field in ['boughtItems'])
+			f(field);
+	}
+}
