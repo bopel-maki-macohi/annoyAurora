@@ -27,16 +27,17 @@ class ShopSubState extends FlxSubState
 
 		add(shopItems);
 
-		var changeGender:ShopItem = new ShopItem('changeGender', SaveManager.hasItem('changeGener'), 10, 10);
-		changeGender.overlapUpdate.add(() -> setSIText('Change Gender'));
-		changeGender.onClick.add(function()
+		var changeGender:ShopItem = new ShopItem('changeGender', 10, 10);
+		changeGender.overlapUpdate.add(item -> setSIText('Change Gender'));
+		changeGender.onClick.add(function(item)
 		{
-			if (!SaveManager.hasItem('changeGener'))
+			if (!SaveManager.hasItem('changeGender'))
 			{
 				SaveManager.buyItem('changeGender');
-				changeGender.bought = true;
+				item.bought = true;
 			}
 		});
+		changeGender.bought = SaveManager.hasItem('changeGender');
 		shopItems.add(changeGender);
 
 		FlxTween.tween(shopBoard, {x: 48}, Constants.TRANSITION_SPEED, {

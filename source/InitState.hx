@@ -10,9 +10,6 @@ class InitState extends FlxState
 
 		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
 
-		persistentDraw = true;
-		persistentUpdate = true;
-
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
 

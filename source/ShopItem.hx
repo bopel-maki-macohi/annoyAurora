@@ -5,18 +5,16 @@ import flixel.FlxSprite;
 
 class ShopItem extends FlxSprite
 {
-	public var onClick:FlxSignal = new FlxSignal();
+	public var onClick:FlxTypedSignal<ShopItem->Void> = new FlxTypedSignal<ShopItem->Void>();
 
-	public var overlapUpdate:FlxSignal = new FlxSignal();
-	public var nonoverlapUpdate:FlxSignal = new FlxSignal();
+	public var overlapUpdate:FlxTypedSignal<ShopItem->Void> = new FlxTypedSignal<ShopItem->Void>();
+	public var nonoverlapUpdate:FlxTypedSignal<ShopItem->Void> = new FlxTypedSignal<ShopItem->Void>();
 
 	public var bought:Bool = false;
 
-	override public function new(item:String, bought:Bool, ?x:Float, ?y:Float)
+	override public function new(item:String, ?x:Float, ?y:Float)
 	{
 		super(x, y, 'assets/shop/$item.png');
-
-		this.bought = bought;
 	}
 
 	override function update(elapsed:Float)
@@ -25,20 +23,18 @@ class ShopItem extends FlxSprite
 
 		if (FlxG.mouse.overlaps(this))
 		{
-			overlapUpdate.dispatch();
+			overlapUpdate.dispatch(this);
 
-			if (!FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
+			Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
 
 			if (FlxG.mouse.justPressed && !bought)
-				onClick.dispatch();
+				onClick.dispatch(this);
 		}
 		else
 		{
-			nonoverlapUpdate.dispatch();
+			nonoverlapUpdate.dispatch(this);
 
-			if (FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, 1 - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
+			Constants.setSpriteCT(this, 1 - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
 		}
 	}
 }

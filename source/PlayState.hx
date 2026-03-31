@@ -45,6 +45,9 @@ class PlayState extends FlxState
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
+		persistentDraw = true;
+		persistentUpdate = true;
+
 		aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 
@@ -74,13 +77,11 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
-		for (field in ['clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
-		{
-			FlxG.watch.addQuick(field, Reflect.field(this, field));
-		}
-
 		if (!transitioning)
 		{
+			for (field in ['clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
+				FlxG.watch.addQuick(field, Reflect.field(this, field));
+
 			clickTick++;
 			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
 
