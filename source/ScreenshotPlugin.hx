@@ -1,4 +1,4 @@
-package util.plugins;
+package;
 
 import flixel.FlxBasic;
 #if SCREENSHOT_PLUGIN
