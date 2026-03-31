@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxColorTransformUtil;
 import flixel.ui.FlxBar;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
@@ -27,7 +28,8 @@ class PlayState extends FlxState
 
 		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
 
-		aurora.makeGraphic(256, 512, FlxColor.LIME);
+		// aurora.makeGraphic(256, 512, FlxColor.LIME);
+		aurora.makeGraphic(256, 512, FlxColor.RED);
 
 		aurora.screenCenter();
 		aurora.y = FlxG.height - aurora.height;
@@ -54,9 +56,18 @@ class PlayState extends FlxState
 
 		auroraTicked = FlxMath.lerp(auroraTicked, 0, 1 / 32);
 
-		if (FlxG.mouse.overlaps(aurora) && FlxG.mouse.justPressed)
+		if (FlxG.mouse.overlaps(aurora))
 		{
-			auroraTicked += FlxG.random.float(2, 10);
+			// if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
+				aurora.setColorTransform(1.5, 1.5, 1.5);
+
+			if (FlxG.mouse.justPressed)
+				auroraTicked += FlxG.random.float(2, 10);
+		}
+		else
+		{
+			// if (FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
+				aurora.setColorTransform(1, 1, 1);
 		}
 	}
 }
