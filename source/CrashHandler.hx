@@ -15,7 +15,7 @@ using StringTools;
 
 	* Mostly yoinked code from FNF
  */
-@:nullSafety
+// @:nullSafety
 class CrashHandler
 {
 	public static final LOG_FOLDER = 'logs';
