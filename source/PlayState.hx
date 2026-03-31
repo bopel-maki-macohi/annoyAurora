@@ -50,6 +50,9 @@ class PlayState extends FlxState
 		persistentDraw = true;
 		persistentUpdate = true;
 
+		SaveManager.instance = new SaveManager();
+		FlxG.plugins.addIfUniqueType(SaveManager.instance);
+
 		aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 
