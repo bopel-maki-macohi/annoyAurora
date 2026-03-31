@@ -97,11 +97,8 @@ class PlayState extends FlxState
 			if (autoClickFlags < 0)
 				autoClickFlags = 0;
 
-			if (autoClickFlags >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
-			{
-				autoClickFlags = Math.round(autoClickFlags);
+			if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
 				FlxG.switchState(() -> new AntiAutoClickState());
-			}
 
 			if (FlxG.mouse.overlaps(aurora))
 			{
@@ -119,8 +116,8 @@ class PlayState extends FlxState
 					}
 					else
 					{
-						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VIOLATION_TICK})');
 						autoClickFlags += 1.0;
+						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VIOLATION_TICK}) : ${Math.round(autoClickFlags)}');
 					}
 				}
 			}
