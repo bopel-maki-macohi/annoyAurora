@@ -126,6 +126,8 @@ class PlayState extends FlxState
 			auroraTickOffBarMaxTarget += 50;
 		if (SaveManager.hasItem('beer'))
 			auroraTickOffBarMaxTarget += Math.round((100 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60);
+		if (SaveManager.hasItem('bonkingBat'))
+			auroraTickOffBarMaxTarget += 25;
 
 		auroraTickOffBarMaxTarget += Math.round(autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS) * 100;
 
@@ -282,6 +284,12 @@ class PlayState extends FlxState
 			auroraTolerance += (.2 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60;
 		}
 
+		if (SaveManager.hasItem('bonkingBat'))
+		{
+			auroraTicked += FlxG.random.float(5, 10);
+			auroraTolerance -= 0.05;
+		}
+
 		auroraTicked += FlxG.random.float(5, 10) + (.1 * auroraTolerance);
 		auroraTolerance += .1;
 
@@ -299,6 +307,9 @@ class PlayState extends FlxState
 
 		if (SaveManager.hasItem('beer'))
 			denominator += 8;
+
+		if (SaveManager.hasItem('bonkinBat'))
+			denominator += 16;
 
 		return 1 / denominator;
 	}

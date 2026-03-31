@@ -103,5 +103,24 @@ class ShopSubState extends FlxSubState
 		});
 		newgame.y -= newgame.height / 1.5;
 		shopItems.add(newgame);
+		
+		var bonkingBat:ShopItem = new ShopItem('bonkingBat', changeGender.x, changeGender.y + (changeGender.height * 2));
+		bonkingBat.overlapUpdate.add(item -> setSIText('Bonking Bat ' + ((item.bought) ? '(Put away)' : '(Grab)')));
+		bonkingBat.onClick.add(function(item)
+		{
+			if (!SaveManager.hasItem('bonkingBat'))
+			{
+				SaveManager.buyItem('bonkingBat');
+				item.bought = true;
+			}
+			else
+			{
+				SaveManager.sellItem('bonkingBat');
+				item.bought = false;
+			}
+		});
+		bonkingBat.bought = SaveManager.hasItem('bonkingBat');
+		bonkingBat.disabledWhenBought = false;
+		shopItems.add(bonkingBat);
 	}
 }
