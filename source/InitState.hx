@@ -8,11 +8,13 @@ class InitState extends FlxState
 	{
 		super.create();
 
-		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
-
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
+		
 		ScreenshotPlugin.init();
+
+		MouseManager.instance = new MouseManager();
+		FlxG.plugins.addPlugin(MouseManager.instance);
 
 		Application.current.onExit.add(function(l)
 		{
@@ -35,10 +37,6 @@ class InitState extends FlxState
 		}
 
 		SaveManager.instance.lastVersion = Main.currentVersion;
-
-		#if (MOBILE_BUILD && !MOBILE_TEST)
-		FlxG.mouse.cursor.alpha = 1 / 100;
-		#end
 	}
 
 	public static function proceed()

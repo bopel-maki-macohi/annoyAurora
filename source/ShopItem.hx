@@ -25,13 +25,13 @@ class ShopItem extends FlxSprite
 		final disabled:Bool = (bought && disabledWhenBought);
 		final brightnessModif:Float = ((disabled) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0);
 
-		if (FlxG.mouse.overlaps(this))
+		if (MouseManager.instance.overlaps(this))
 		{
 			overlapUpdate.dispatch(this);
 
 			Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - brightnessModif);
 
-			if (FlxG.mouse.justPressed && !disabled)
+			if (MouseManager.instance.justPressed && !disabled)
 			{
 				FlxG.sound.play('assets/shopItem.wav');
 				onClick.dispatch(this);

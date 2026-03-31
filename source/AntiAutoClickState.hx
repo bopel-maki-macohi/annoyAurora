@@ -39,6 +39,6 @@ class AntiAutoClickState extends FlxState
 
 		FlxG.sound.playMusic('assets/cheater.wav');
 
-		FlxG.mouse.visible = false;
+		MouseManager.instance.visible = false;
 	}
 }

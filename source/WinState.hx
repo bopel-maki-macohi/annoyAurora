@@ -65,7 +65,7 @@ class WinState extends FlxState
 		if (!SaveManager.hasEnding(ending))
 			SaveManager.getEnding(ending);
 
-		FlxG.mouse.visible = false;
+		MouseManager.instance.visible = false;
 	}
 
 	override function update(elapsed:Float)

@@ -82,7 +82,7 @@ class PlayState extends FlxState
 
 		add(shopBtn);
 
-		FlxG.mouse.visible = true;
+		MouseManager.instance.visible = true;
 	}
 
 	public function setAuroraScale(x:Float, y:Float)
@@ -98,6 +98,8 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		MouseManager.instance.reset();
 
 		for (field in [
 			'passedSeconds',
@@ -159,12 +161,14 @@ class PlayState extends FlxState
 				FlxG.switchState(() -> new AntiAutoClickState());
 			#end
 
-			if (FlxG.mouse.overlaps(aurora))
+			if (MouseManager.instance.overlaps(aurora))
 			{
+				MouseManager.instance.hover();
+
 				if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
 					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL - .4);
 
-				if (FlxG.mouse.justPressed)
+				if (MouseManager.instance.justPressed)
 				{
 					trace('ticksSinceLastClick: $ticksSinceLastClick');
 
@@ -195,12 +199,14 @@ class PlayState extends FlxState
 			}
 		}
 
-		if (FlxG.mouse.overlaps(shopBtn))
+		if (MouseManager.instance.overlaps(shopBtn))
 		{
+			MouseManager.instance.hover();
+
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
 				Constants.setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
-			if (FlxG.mouse.justPressed)
+			if (MouseManager.instance.justPressed)
 			{
 				FlxG.sound.play('assets/uiClick.wav');
 
