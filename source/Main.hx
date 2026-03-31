@@ -6,6 +6,13 @@ import openfl.display.Sprite;
 
 class Main extends Sprite
 {
+	public static var currentVersion(get, never):String;
+
+	static function get_currentVersion():String
+	{
+		return FlxG.stage.application.meta.get('version');
+	}
+
 	public function new()
 	{
 		super();

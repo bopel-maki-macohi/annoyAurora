@@ -18,17 +18,21 @@ class InitState extends FlxState
 			SaveManager.instance.save();
 		});
 
-		final curVer = FlxG.stage.application.meta.get('version');
+		UpdateUtil.checkForUpdate();
 
-		if (SaveManager.instance.lastVersion == curVer)
+		if (UpdateUtil.latestVersion != Main.currentVersion)
+			FlxG.switchState(() -> new OutdatedState());
+		else if (SaveManager.instance.lastVersion == Main.currentVersion)
+		{
 			proceed();
+		}
 		else
 		{
 			trace('JUST UPGRADED!');
 			FlxG.switchState(() -> new UpgradedState(SaveManager.instance.lastVersion));
 		}
 
-		SaveManager.instance.lastVersion = curVer;
+		SaveManager.instance.lastVersion = Main.currentVersion;
 	}
 
 	public static function proceed()
