@@ -39,20 +39,20 @@ class WinState extends FlxState
 
 		text.size = 16;
 
-		text.text = 'Congrats!\n';
+		text.text = 'Congrats!\nYou won in ${SaveManager.instance.passedSeconds} seconds!\n\n';
 		switch (ending)
 		{
 			case 'female':
-				text.text += 'You are an asshole transgender.';
+				text.text += 'You are now an asshole transgender.';
 
 			case 'drunk-female':
-				text.text += 'You\'re a drunk transgender jerk.';
+				text.text += 'You are now a drunk transgender jerk.';
 
 			case 'drunk':
 				text.text += 'You are now another drunk asshole boyfriend that no one likes.';
 
 			default:
-				text.text += 'You are...\nkinda just an asshole now...';
+				text.text += 'You\'re... kinda just an asshole now...';
 		}
 
 		text.text += '\n\nPress ENTER to do it again, you jerk.';
