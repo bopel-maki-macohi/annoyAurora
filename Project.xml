@@ -43,6 +43,8 @@
 
 	<haxelib name="flixel" />
 
+	<haxelib name="extension-androidtools" if="MOBILE_BUILD"/>
+
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<haxedef name="FLX_NO_HEALTH" />
