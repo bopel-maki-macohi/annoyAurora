@@ -1,3 +1,4 @@
+import flixel.FlxSprite;
 import flixel.FlxG;
 
 class Constants
@@ -15,4 +16,7 @@ class Constants
 		return Math.round(FlxG.height * 0.05);
 
 	public static final SPRITE_HOVER_BRIGHTNESSVAL:Float = 1.5;
+
+	public static function setSpriteCT(sprite:FlxSprite, ctv:Float)
+		sprite.setColorTransform(ctv, ctv, ctv);
 }

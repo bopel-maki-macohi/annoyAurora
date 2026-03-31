@@ -63,11 +63,6 @@ class PlayState extends FlxState
 		add(shopBtn);
 	}
 
-	public function setSpriteCT(sprite:FlxSprite, ctv:Float)
-	{
-		sprite.setColorTransform(ctv, ctv, ctv);
-	}
-
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -79,7 +74,7 @@ class PlayState extends FlxState
 			if (FlxG.mouse.overlaps(aurora))
 			{
 				if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
-					setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
+					Constants.setSpriteCT(aurora, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 				if (FlxG.mouse.justPressed)
 					auroraTicked += FlxG.random.float(2, 10);
@@ -87,14 +82,14 @@ class PlayState extends FlxState
 			else
 			{
 				if (FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
-					setSpriteCT(aurora, 1);
+					Constants.setSpriteCT(aurora, 1);
 			}
 		}
 
 		if (FlxG.mouse.overlaps(shopBtn))
 		{
 			if (!FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
-				setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
+				Constants.setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 			if (FlxG.mouse.justPressed)
 			{
@@ -112,7 +107,7 @@ class PlayState extends FlxState
 		else
 		{
 			if (FlxColorTransformUtil.hasRGBAMultipliers(shopBtn.colorTransform))
-				setSpriteCT(shopBtn, 1);
+				Constants.setSpriteCT(shopBtn, 1);
 		}
 	}
 
