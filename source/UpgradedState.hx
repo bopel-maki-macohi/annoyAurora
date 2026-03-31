@@ -31,7 +31,7 @@ class UpgradedState extends FlxState
 		message.text += 'Welcome to version ${FlxG.stage.application.meta.get('version')}!'
 			+ '\n\n'
 			+ upgradeMessage
-			+ '\n\nPress anything to go to gameplay lol';
+			+ '\n\nPress ENTER to go to gameplay lol';
 
 		message.alignment = CENTER;
 		message.screenCenter();
@@ -41,7 +41,7 @@ class UpgradedState extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.ANY)
+		if (FlxG.keys.justReleased.ENTER)
 			InitState.proceed();
 	}
 }

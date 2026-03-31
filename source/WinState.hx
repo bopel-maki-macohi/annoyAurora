@@ -55,7 +55,7 @@ class WinState extends FlxState
 				text.text += 'You are...\nkinda just an asshole now...';
 		}
 
-		text.text += '\n\nPress anything to do it again, you jerk.';
+		text.text += '\n\nPress ENTER to do it again, you jerk.';
 
 		add(text);
 		text.alignment = CENTER;
@@ -72,7 +72,7 @@ class WinState extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.ANY)
+		if (FlxG.keys.justReleased.ENTER)
 		{
 			SaveManager.newGame();
 			FlxG.switchState(() -> new PlayState());
