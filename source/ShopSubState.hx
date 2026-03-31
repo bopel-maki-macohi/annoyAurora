@@ -27,24 +27,7 @@ class ShopSubState extends FlxSubState
 
 		add(shopItems);
 
-		var changeGender:ShopItem = new ShopItem('changeGender', 10, 10);
-		changeGender.overlapUpdate.add(item -> setSIText('Change Gender to: ' + ((item.bought) ? 'Male' : 'Female')));
-		changeGender.onClick.add(function(item)
-		{
-			if (!SaveManager.hasItem('changeGender'))
-			{
-				SaveManager.buyItem('changeGender');
-				item.bought = true;
-			}
-			else
-			{
-				SaveManager.sellItem('changeGender');
-				item.bought = false;
-			}
-		});
-		changeGender.bought = SaveManager.hasItem('changeGender');
-		changeGender.disabledWhenBought = false;
-		shopItems.add(changeGender);
+		addItems();
 
 		FlxTween.tween(shopBoard, {x: 48}, Constants.TRANSITION_SPEED, {
 			ease: FlxEase.sineIn
@@ -89,5 +72,41 @@ class ShopSubState extends FlxSubState
 	public function setSIText(text:String)
 	{
 		shopItemText.text = text;
+	}
+
+	public function addItems()
+	{
+		var changeGender:ShopItem = new ShopItem('changeGender', 10, 10);
+		changeGender.overlapUpdate.add(item -> setSIText('Change Gender to: ' + ((item.bought) ? 'Male' : 'Female')));
+		changeGender.onClick.add(function(item)
+		{
+			if (!SaveManager.hasItem('changeGender'))
+			{
+				SaveManager.buyItem('changeGender');
+				item.bought = true;
+			}
+			else
+			{
+				SaveManager.sellItem('changeGender');
+				item.bought = false;
+			}
+		});
+		changeGender.bought = SaveManager.hasItem('changeGender');
+		changeGender.disabledWhenBought = false;
+		shopItems.add(changeGender);
+
+		var beer:ShopItem = new ShopItem('beer', changeGender.x + (changeGender.width * 2), changeGender.y);
+		beer.overlapUpdate.add(item -> setSIText('BEER!'));
+		beer.onClick.add(function(item)
+		{
+			if (SaveManager.countBoughtItem('beer') < 2)
+			{
+				SaveManager.instance.beerTicks += 300;
+				SaveManager.buyItem('beer');
+				item.bought = SaveManager.countBoughtItem('beer') >= 2;
+			}
+		});
+		beer.bought = SaveManager.hasItem('beer');
+		shopItems.add(beer);
 	}
 }

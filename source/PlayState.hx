@@ -87,14 +87,20 @@ class PlayState extends FlxState
 		super.update(elapsed);
 
 		auroraTickOffBarMaxTarget = 100;
+
 		if (SaveManager.hasItem('changeGender'))
 			auroraTickOffBarMaxTarget += 50;
+		if (SaveManager.hasItem('beer'))
+			auroraTickOffBarMaxTarget += Math.round((100 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 30);
 
 		auroraTickOffBar.setRange(0, FlxMath.lerp(auroraTickOffBar.max, auroraTickOffBarMaxTarget, .1));
 
 		if (!transitioning)
 		{
-			for (field in ['clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
+			if (SaveManager.instance.beerTicks > 0)
+				SaveManager.instance.beerTicks -= 0.25;
+
+			for (field in ['auroraTickOffBarMaxTarget', 'clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
 				FlxG.watch.addQuick(field, Reflect.field(this, field));
 
 			setAuroraScale(FlxMath.lerp(aurora.scale.x, 1, 1 / 32), FlxMath.lerp(aurora.scale.y, 1, 1 / 32));
@@ -126,7 +132,7 @@ class PlayState extends FlxState
 					{
 						lastAnnoyanceTick = clickTick;
 						addAuroraTick();
-						
+
 						setAuroraScale(1.05, 0.95);
 					}
 					else
@@ -213,6 +219,9 @@ class PlayState extends FlxState
 	{
 		if (SaveManager.hasItem('changeGender'))
 			auroraTicked += FlxG.random.float(4, 6);
+
+		if (SaveManager.hasItem('beer'))
+			auroraTicked += FlxG.random.float(10, 15) * SaveManager.countBoughtItem('beer') + SaveManager.instance.beerTicks * 1 / 60;
 
 		auroraTicked += FlxG.random.float(2, 10);
 	}

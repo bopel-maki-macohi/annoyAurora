@@ -8,35 +8,7 @@ class SaveManager extends FlxBasic
 
 	public var boughtItems:Array<String> = [];
 
-	public static function sellItem(item:String)
-	{
-		if (instance == null)
-			return;
-
-		instance.boughtItems.remove(item);
-	}
-
-	public static function hasItem(item:String):Bool
-		return countBoughtItem(item) > 0;
-
-	public static function countBoughtItem(item:String):Int
-	{
-		if (instance == null)
-			return 0;
-
-		if (!instance.boughtItems.contains(item))
-			return 0;
-		else
-			return instance.boughtItems.filter(f -> return f == item).length;
-	}
-
-	public static function buyItem(item:String)
-	{
-		if (instance == null)
-			return;
-
-		instance.boughtItems.push(item);
-	}
+	public var beerTicks:Float = 0;
 
 	override public function new()
 	{
@@ -88,7 +60,37 @@ class SaveManager extends FlxBasic
 
 	public function saveFieldFunction(f:String->Void)
 	{
-		for (field in ['boughtItems'])
+		for (field in ['boughtItems', 'beerTicks'])
 			f(field);
+	}
+
+	public static function sellItem(item:String)
+	{
+		if (instance == null)
+			return;
+
+		instance.boughtItems.remove(item);
+	}
+
+	public static function hasItem(item:String):Bool
+		return countBoughtItem(item) > 0;
+
+	public static function countBoughtItem(item:String):Int
+	{
+		if (instance == null)
+			return 0;
+
+		if (!instance.boughtItems.contains(item))
+			return 0;
+		else
+			return instance.boughtItems.filter(f -> return f == item).length;
+	}
+
+	public static function buyItem(item:String)
+	{
+		if (instance == null)
+			return;
+
+		instance.boughtItems.push(item);
 	}
 }
