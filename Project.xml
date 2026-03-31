@@ -17,6 +17,11 @@
 
 	<define name="SCREENSHOT_PLUGIN" if="desktop"/>
 
+	<icon path="./dev/icon-64.png" size="64"/>
+	<icon path="./dev/icon-32.png" size="32"/>
+	<icon path="./dev/icon-16.png" size="16"/>
+	<icon path="./dev/icon-128.png" size="128"/>
+	<icon path="./dev/icon-256.png" size="256"/>
 	<icon path="./dev/icon.png" />
 
 	<!-- _________________________ Application Settings _________________________ -->
