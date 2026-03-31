@@ -49,7 +49,7 @@ class InitState extends FlxState
 			}
 
 		#if WINSTATE
-		FlxG.switchState(() -> new WinState());
+		FlxG.switchState(() -> new WinState(true));
 		#else
 		FlxG.switchState(() -> new PlayState());
 		#end
