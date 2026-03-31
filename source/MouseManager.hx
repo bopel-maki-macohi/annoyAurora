@@ -41,6 +41,9 @@ class MouseManager extends FlxBasic
 
 	public function setMouseAsset(asset:String, offsets:FlxPoint)
 	{
+		if (!visible)
+			return;
+
 		if (mouseAsset == asset)
 			return;
 
