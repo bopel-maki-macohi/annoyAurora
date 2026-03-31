@@ -38,7 +38,7 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
-		auroraTicked = FlxMath.lerp(auroraTicked, 0, 0.75);
+		auroraTicked = FlxMath.lerp(auroraTicked, 0, 1 / 32);
 
 		if (FlxG.mouse.overlaps(aurora) && FlxG.mouse.justPressed)
 		{
