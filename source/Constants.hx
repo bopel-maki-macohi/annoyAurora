@@ -28,4 +28,6 @@ class Constants
 	public static final SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET:Float = .25;
 
 	public static final PASSEDSECONDS_INCREMENT:Float = .1;
+
+	public static final FOLDER_SCREENSHOTS:String = 'screenshots';
 }
