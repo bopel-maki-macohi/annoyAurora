@@ -28,8 +28,8 @@ class PlayState extends FlxState
 
 		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
 
-		// aurora.makeGraphic(256, 512, FlxColor.LIME);
-		aurora.makeGraphic(256, 512, FlxColor.RED);
+		aurora.makeGraphic(256, 512, FlxColor.LIME);
+		// aurora.makeGraphic(256, 512, FlxColor.RED);
 
 		aurora.screenCenter();
 		aurora.y = FlxG.height - aurora.height;
@@ -58,7 +58,7 @@ class PlayState extends FlxState
 
 		if (FlxG.mouse.overlaps(aurora))
 		{
-			// if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
+			if (!FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
 				aurora.setColorTransform(1.5, 1.5, 1.5);
 
 			if (FlxG.mouse.justPressed)
@@ -66,7 +66,7 @@ class PlayState extends FlxState
 		}
 		else
 		{
-			// if (FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
+			if (FlxColorTransformUtil.hasRGBAMultipliers(aurora.colorTransform))
 				aurora.setColorTransform(1, 1, 1);
 		}
 	}
