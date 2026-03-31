@@ -28,9 +28,10 @@ class PlayState extends FlxState
 		final barWidth = Math.round(FlxG.width * 0.8);
 		final barHeight = Math.round(FlxG.height * 0.1);
 
-		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, barWidth, barHeight, this, 'auroraTicked', 0, 100, true);
+		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, barWidth, barHeight, this, 'auroraTicked', 0, 100);
 		add(auroraTickOffBar);
 		auroraTickOffBar.screenCenter(X);
+		auroraTickOffBar.createFilledBar(FlxColor.RED, FlxColor.LIME, true, FlxColor.BLACK);
 	}
 
 	override public function update(elapsed:Float)
