@@ -133,7 +133,12 @@ class PlayState extends FlxState
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, auroraTickedLerpRatio());
 
 			if (auroraTicked >= Math.round(auroraTickOffBarMaxTarget))
-				FlxG.switchState(() -> new WinState());
+			{
+				if (Math.round(autoClickFlags) >= Constants.ANTI_AUTOCLICK_MIN_VIOLATIONS)
+					FlxG.switchState(() -> new AntiAutoClickState(true));
+				else
+					FlxG.switchState(() -> new WinState());
+			}
 
 			if (autoClickFlags > 0)
 				autoClickFlags -= 0.1;
