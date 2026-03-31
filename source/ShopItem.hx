@@ -38,7 +38,7 @@ class ShopItem extends FlxSprite
 			nonoverlapUpdate.dispatch();
 
 			if (FlxColorTransformUtil.hasRGBAMultipliers(colorTransform))
-				Constants.setSpriteCT(this, 1);
+				Constants.setSpriteCT(this, 1 - ((bought) ? .25 : 0));
 		}
 	}
 }
