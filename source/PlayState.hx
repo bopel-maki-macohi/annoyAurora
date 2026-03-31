@@ -32,6 +32,7 @@ class PlayState extends FlxState
 	// Anti-autoClicker
 	public var ticksSinceLastClick:Int = 0;
 	public var lastAnnoyanceTick:Int = 0;
+	public var autoClickFlags:Float = 1.0;
 
 	override public function create()
 	{
@@ -78,12 +79,29 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		for (field in ['clickTick', 'ticksSinceLastClick', 'autoClickFlags', 'lastAnnoyanceTick'])
+		{
+			FlxG.watch.addQuick(field, Reflect.field(this, field));
+		}
+
 		if (!transitioning)
 		{
 			clickTick++;
 			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
 
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, 1 / 32);
+
+			if (autoClickFlags > 0)
+				autoClickFlags -= 0.1;
+
+			if (autoClickFlags < 0)
+				autoClickFlags = 0;
+
+			if (autoClickFlags >= Constants.ANTI_AUTOCLICK_TSLA_VALUE)
+			{
+				autoClickFlags = Math.round(autoClickFlags);
+				FlxG.switchState(() -> new AntiAutoClickState());
+			}
 
 			if (FlxG.mouse.overlaps(aurora))
 			{
@@ -94,14 +112,15 @@ class PlayState extends FlxState
 				{
 					trace('ticksSinceLastClick: $ticksSinceLastClick');
 
-					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_VALUE)
+					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_TSLA_VALUE)
 					{
 						lastAnnoyanceTick = clickTick;
 						auroraTicked += FlxG.random.float(2, 10);
 					}
 					else
 					{
-						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VALUE})');
+						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_TSLA_VALUE})');
+						autoClickFlags += 1.0;
 					}
 				}
 			}
