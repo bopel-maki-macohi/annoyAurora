@@ -35,6 +35,10 @@ class InitState extends FlxState
 		}
 
 		SaveManager.instance.lastVersion = Main.currentVersion;
+
+		#if (MOBILE_BUILD && !MOBILE_TEST)
+		FlxG.mouse.cursor.alpha = 1 / 100;
+		#end
 	}
 
 	public static function proceed()
