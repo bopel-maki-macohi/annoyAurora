@@ -28,7 +28,7 @@ class Constants
 	public static final ANTI_AUTOCLICK_MAX_VIOLATIONS:Float = 16.0;
 	public static final ANTI_AUTOCLICK_MIN_VIOLATIONS:Float = 4.0;
 
-	public static final SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET:Float = .25;
+	public static final SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET:Float = .75;
 
 	public static final PASSEDSECONDS_INCREMENT:Float = .1;
 
