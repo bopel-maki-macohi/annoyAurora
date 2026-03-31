@@ -17,6 +17,7 @@ class PlayState extends FlxState
 	public var aurora:FlxSprite = new FlxSprite();
 	public var auroraTicked:Float = 0.0;
 	public var auroraTickOffBar:FlxBar;
+	public var auroraTickOffBarMaxTarget:Float = 100;
 
 	public var shopBtn:FlxSprite = new FlxSprite();
 	public var inShop:Bool = false;
@@ -76,6 +77,12 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		auroraTickOffBarMaxTarget = 100;
+		if (SaveManager.hasItem('changeGender'))
+			auroraTickOffBarMaxTarget += 50;
+
+		auroraTickOffBar.setRange(0, FlxMath.lerp(auroraTickOffBar.max, auroraTickOffBarMaxTarget, .1));
 
 		if (!transitioning)
 		{
