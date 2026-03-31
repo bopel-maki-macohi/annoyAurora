@@ -93,5 +93,14 @@ class ShopSubState extends FlxSubState
 		});
 		beer.bought = SaveManager.hasItem('beer');
 		shopItems.add(beer);
+		
+		var newgame:ShopItem = new ShopItem('newgame', changeGender.x, changeGender.y - (changeGender.height * 2));
+		newgame.overlapUpdate.add(item -> setSIText('New game'));
+		newgame.onClick.add(function(item)
+		{
+			SaveManager.newGame();
+			FlxG.resetState();
+		});
+		shopItems.add(newgame);
 	}
 }
