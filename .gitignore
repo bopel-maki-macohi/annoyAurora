@@ -1,3 +1,5 @@
 export/
 
 .DS_Store
+
+**.aup3-**

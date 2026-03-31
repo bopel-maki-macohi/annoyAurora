@@ -97,6 +97,9 @@ class PlayState extends FlxState
 				setSpriteCT(shopBtn, Constants.SPRITE_HOVER_BRIGHTNESSVAL);
 
 			if (FlxG.mouse.justPressed)
+			{
+				FlxG.sound.play('assets/uiClick.wav');
+
 				if (!inShop)
 				{
 					inShop = true;
@@ -104,6 +107,7 @@ class PlayState extends FlxState
 				}
 				else
 					closeSubState();
+			}
 		}
 		else
 		{
