@@ -55,6 +55,8 @@ class WinState extends FlxState
 		switch (ending)
 		{
 			case 'abuse-female':
+				sprite.y += sprite.height / 10;
+
 				if (FlxG.random.bool(15))
 					text.text += 'In the nicest way possible.\nI wish you die single.';
 				else if (FlxG.random.bool(8))
