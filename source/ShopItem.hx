@@ -11,6 +11,7 @@ class ShopItem extends FlxSprite
 	public var nonoverlapUpdate:FlxTypedSignal<ShopItem->Void> = new FlxTypedSignal<ShopItem->Void>();
 
 	public var bought:Bool = false;
+	public var disabledWhenBought:Bool = true;
 
 	override public function new(item:String, ?x:Float, ?y:Float)
 	{
@@ -21,20 +22,23 @@ class ShopItem extends FlxSprite
 	{
 		super.update(elapsed);
 
+		final disabled:Bool = (bought && disabledWhenBought);
+		final brightnessModif:Float = ((disabled) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0);
+
 		if (FlxG.mouse.overlaps(this))
 		{
 			overlapUpdate.dispatch(this);
 
-			Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
+			Constants.setSpriteCT(this, Constants.SPRITE_HOVER_BRIGHTNESSVAL - brightnessModif);
 
-			if (FlxG.mouse.justPressed && !bought)
+			if (FlxG.mouse.justPressed && !disabled)
 				onClick.dispatch(this);
 		}
 		else
 		{
 			nonoverlapUpdate.dispatch(this);
 
-			Constants.setSpriteCT(this, 1 - ((bought) ? Constants.SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET : 0));
+			Constants.setSpriteCT(this, 1 - brightnessModif);
 		}
 	}
 }
