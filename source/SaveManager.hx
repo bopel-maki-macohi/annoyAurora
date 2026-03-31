@@ -1,3 +1,4 @@
+import lime.app.Application;
 import flixel.FlxG;
 import flixel.FlxBasic;
 
@@ -8,8 +9,8 @@ class SaveManager extends FlxBasic
 	public var boughtItems:Array<String> = [];
 
 	public static function hasItem(item:String):Bool
-        return countBoughtItem(item) > 0;
-    
+		return countBoughtItem(item) > 0;
+
 	public static function countBoughtItem(item:String):Int
 	{
 		if (instance == null)
@@ -36,8 +37,6 @@ class SaveManager extends FlxBasic
 		FlxG.save.bind('AnnoyAurora', 'Maki');
 
 		loadData();
-
-		FlxG.stage.application.onExit.add(l -> save);
 	}
 
 	public function save()
@@ -51,10 +50,12 @@ class SaveManager extends FlxBasic
 	{
 		saveFieldFunction(f ->
 		{
+			final saveField = Reflect.field(FlxG.save.data, f);
+
 			switch (f)
 			{
 				default:
-					Reflect.setField(this, f, Reflect.field(FlxG.save.data, f));
+					if (saveField != null) Reflect.setField(this, f, saveField);
 			}
 		});
 

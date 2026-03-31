@@ -45,14 +45,6 @@ class PlayState extends FlxState
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
-		FlxG.mouse.load('assets/cursor.png', 1, -32, -32);
-
-		persistentDraw = true;
-		persistentUpdate = true;
-
-		SaveManager.instance = new SaveManager();
-		FlxG.plugins.addIfUniqueType(SaveManager.instance);
-
 		aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 
