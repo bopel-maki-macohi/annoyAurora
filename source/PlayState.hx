@@ -19,6 +19,8 @@ class PlayState extends FlxState
 	{
 		super.create();
 
+		FlxG.camera.bgColor = FlxColor.WHITE;
+
 		aurora.makeGraphic(256, 512, FlxColor.LIME);
 		add(aurora);
 
