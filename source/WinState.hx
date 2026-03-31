@@ -18,7 +18,7 @@ class WinState extends FlxState
 		sprite.screenCenter();
 		add(sprite);
 
-        text.size = 32;
+        text.size = 16;
         text.text = 'Congrats! You are... kinda an asshole...';
         add(text);
         text.screenCenter();
