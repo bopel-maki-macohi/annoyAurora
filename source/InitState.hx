@@ -18,6 +18,10 @@ class InitState extends FlxState
 			SaveManager.instance.save();
 		});
 
+		#if WINSTATE
+		FlxG.switchState(() -> new WinState());
+		#else
 		FlxG.switchState(() -> new PlayState());
+		#end
 	}
 }

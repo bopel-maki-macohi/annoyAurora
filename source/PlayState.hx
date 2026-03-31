@@ -87,7 +87,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		
+
 		for (field in [
 			'auroraTickOffBarMaxTarget',
 			'clickTick',
@@ -118,6 +118,9 @@ class PlayState extends FlxState
 			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
 
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, auroraTickedLerpRatio());
+
+			if (auroraTicked >= Math.round(auroraTickOffBarMaxTarget))
+				FlxG.switchState(() -> new WinState());
 
 			if (autoClickFlags > 0)
 				autoClickFlags -= 0.1;
