@@ -137,6 +137,8 @@ class ShopSubState extends FlxSubState
 				SaveManager.sellItem('deage');
 				item.bought = false;
 			}
+
+			PlayState.auroraSpriteChangeTimer.onComplete(PlayState.auroraSpriteChangeTimer);
 		});
 		deage.bought = SaveManager.hasItem('deage');
 		deage.disabledWhenBought = false;

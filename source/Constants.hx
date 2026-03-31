@@ -50,7 +50,10 @@ class Constants
 
 	static function get_SPRITES_AURORA():Array<String>
 	{
-		return Assets.list().filter(p -> return p.startsWith('assets/auroras/'));
+		if (SaveManager.hasItem('deage'))
+			return Assets.list().filter(p -> return p.startsWith('assets/auroras-small/'));
+		else
+			return Assets.list().filter(p -> return p.startsWith('assets/auroras/'));
 	}
 
 	public static function getRandomAuroraSprite()

@@ -17,7 +17,7 @@ using StringTools;
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
-	public var auroraSpriteChangeTimer:FlxTimer = new FlxTimer();
+	public static var auroraSpriteChangeTimer:FlxTimer = new FlxTimer();
 
 	public var auroraTicked:Float = 0.0;
 	public var auroraTickOffBar:FlxBar;
@@ -64,7 +64,13 @@ class PlayState extends FlxState
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 		aurora.loadGraphic('assets/aurora.png');
-		auroraSpriteChangeTimer.start(1, t -> aurora.loadGraphic('assets/aurora.png'), 0);
+		auroraSpriteChangeTimer.start(1, t ->
+		{
+			if (SaveManager.hasItem('deage'))
+				aurora.loadGraphic('assets/aurora-small.png');
+			else
+				aurora.loadGraphic('assets/aurora.png');
+		}, 0);
 
 		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
@@ -128,6 +134,8 @@ class PlayState extends FlxState
 			auroraTickOffBarMaxTarget += Math.round((100 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60);
 		if (SaveManager.hasItem('bonkingBat'))
 			auroraTickOffBarMaxTarget += 25;
+		if (SaveManager.hasItem('deage'))
+			auroraTickOffBarMaxTarget += 50;
 
 		auroraTickOffBarMaxTarget += Math.round(autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS) * 100;
 
@@ -290,6 +298,12 @@ class PlayState extends FlxState
 			auroraTolerance -= 0.05;
 		}
 
+		if (SaveManager.hasItem('deage'))
+		{
+			auroraTicked += FlxG.random.float(6, 12);
+			auroraTolerance += .005;
+		}
+
 		auroraTicked += FlxG.random.float(5, 10) + (.1 * auroraTolerance);
 		auroraTolerance += .1;
 
@@ -310,6 +324,9 @@ class PlayState extends FlxState
 
 		if (SaveManager.hasItem('bonkinBat'))
 			denominator += 16;
+
+		if (SaveManager.hasItem('deage'))
+			denominator -= 12;
 
 		return 1 / denominator;
 	}
