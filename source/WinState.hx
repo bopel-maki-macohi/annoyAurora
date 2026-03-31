@@ -55,10 +55,13 @@ class WinState extends FlxState
 		switch (ending)
 		{
 			case 'abuse-female':
-				sprite.y += sprite.height / 10;
+				sprite.y += sprite.height / 12;
 
-				if (FlxG.random.bool(15))
+				if (FlxG.random.bool(15) || true)
+				{
+					sprite.y += sprite.height / 12;
 					text.text += 'In the nicest way possible.\nI wish you die single.';
+				}
 				else if (FlxG.random.bool(8))
 					text.text += 'I wish you a miscarrage.';
 				else if (FlxG.random.bool(1))
@@ -72,10 +75,15 @@ class WinState extends FlxState
 				}
 
 			case 'abuse':
+				sprite.y += sprite.height / 12;
+
 				if (SaveManager.hasEnding('drunk') && SaveManager.hasItem('beer'))
 					text.text += 'I WAS JOKING DUDE. WHAT THE FUCK';
 				else
+				{
+					sprite.y += sprite.height / 12;
 					text.text += 'You are the reason searching up\n"My boyfriend is abusing me"\nleads to a hotline on google.';
+				}
 
 			case 'female':
 				text.text += 'You are now an asshole transgender.';
