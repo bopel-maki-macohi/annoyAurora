@@ -15,10 +15,19 @@ class WinState extends FlxState
 
 		var ending:String = 'normal';
 
-		if (SaveManager.hasItem('beer'))
+		function winstateDefineRandom():Bool
+		{
+			#if WINSTATE
+			return FlxG.random.bool();
+			#end
+
+			return false;
+		}
+
+		if (SaveManager.hasItem('beer') || winstateDefineRandom())
 			ending = 'drunk';
 
-		if (SaveManager.hasItem('changeGender'))
+		if (SaveManager.hasItem('changeGender') || winstateDefineRandom())
 			if (ending == 'normal')
 				ending = 'female';
 			else
