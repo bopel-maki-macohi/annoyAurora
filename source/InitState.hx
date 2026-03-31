@@ -12,6 +12,7 @@ class InitState extends FlxState
 
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
+		ScreenshotPlugin.init();
 
 		Application.current.onExit.add(function(l)
 		{
