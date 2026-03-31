@@ -18,6 +18,7 @@ class PlayState extends FlxState
 	public var auroraTicked:Float = 0.0;
 	public var auroraTickOffBar:FlxBar;
 	public var auroraTickOffBarMaxTarget:Float = 100;
+	public var auroraTolerance:Float = 0.0;
 
 	public var shopBtn:FlxSprite = new FlxSprite();
 	public var inShop:Bool = false;
@@ -43,10 +44,12 @@ class PlayState extends FlxState
 		secondsPasser.start(Constants.PASSEDSECONDS_INCREMENT, t ->
 		{
 			passedSeconds += Constants.PASSEDSECONDS_INCREMENT;
-			
+
 			passedSeconds = FlxMath.roundDecimal(passedSeconds, 2);
 			SaveManager.instance.passedSeconds = passedSeconds;
 		}, 0);
+
+		auroraTolerance = SaveManager.instance.auroraTolerance;
 
 		FlxG.camera.bgColor = FlxColor.WHITE;
 
@@ -93,16 +96,22 @@ class PlayState extends FlxState
 		super.update(elapsed);
 
 		for (field in [
+			'passedSeconds',
+
 			'auroraTickOffBarMaxTarget',
+			'auroraTolerance',
+
 			'clickTick',
 			'ticksSinceLastClick',
 			'autoClickFlags',
 			'lastAnnoyanceTick',
-			'passedSeconds'
 		])
 			FlxG.watch.addQuick(field, Reflect.field(this, field));
 
-		auroraTickOffBarMaxTarget = 100;
+		if (auroraTolerance < 0)
+			auroraTolerance = 0;
+
+		auroraTickOffBarMaxTarget = 50 + Math.round(auroraTolerance);
 
 		if (SaveManager.hasItem('changeGender'))
 			auroraTickOffBarMaxTarget += 50;
@@ -234,12 +243,19 @@ class PlayState extends FlxState
 	public function addAuroraTick()
 	{
 		if (SaveManager.hasItem('changeGender'))
+		{
 			auroraTicked += FlxG.random.float(4, 6);
+			auroraTolerance += .05;
+		}
 
 		if (SaveManager.hasItem('beer'))
+		{
 			auroraTicked += FlxG.random.float(10, 15) * SaveManager.countBoughtItem('beer') + SaveManager.instance.beerTicks * 1 / 60;
+			auroraTolerance -= .05;
+		}
 
-		auroraTicked += FlxG.random.float(2, 10);
+		auroraTicked += FlxG.random.float(1, 5) + (1 * auroraTolerance);
+		auroraTolerance += .1;
 	}
 
 	public function auroraTickedLerpRatio():Float
