@@ -16,6 +16,8 @@ class SaveManager extends FlxBasic
 
 	public var auroraTolerance:Float = 0;
 
+	public var lastVersion:String = '0.0.0';
+
 	override public function new()
 	{
 		super();
@@ -40,11 +42,8 @@ class SaveManager extends FlxBasic
 		{
 			final saveField = Reflect.field(FlxG.save.data, f);
 
-			switch (f)
-			{
-				default:
-					if (saveField != null) Reflect.setField(this, f, saveField);
-			}
+			if (saveField != null)
+				Reflect.setField(this, f, saveField);
 		});
 
 		trace('Loaded savedata: ${FlxG.save.data}');
@@ -54,11 +53,7 @@ class SaveManager extends FlxBasic
 	{
 		saveFieldFunction(f ->
 		{
-			switch (f)
-			{
-				default:
-					Reflect.setField(FlxG.save.data, f, Reflect.field(this, f));
-			}
+			Reflect.setField(FlxG.save.data, f, Reflect.field(this, f));
 		});
 
 		trace('Saved savedata: ${FlxG.save.data}');
@@ -66,7 +61,14 @@ class SaveManager extends FlxBasic
 
 	public function saveFieldFunction(f:String->Void)
 	{
-		for (field in ['boughtItems', 'beerTicks', 'passedSeconds', 'endings', 'auroraTolerance'])
+		for (field in [
+			'boughtItems',
+			'beerTicks',
+			'passedSeconds',
+			'endings',
+			'auroraTolerance',
+			'lastVersion'
+		])
 			f(field);
 	}
 
@@ -74,7 +76,7 @@ class SaveManager extends FlxBasic
 	{
 		if (instance == null)
 			return;
-		
+
 		instance.boughtItems = [];
 		instance.beerTicks = 0;
 		instance.passedSeconds = 0;
