@@ -28,7 +28,7 @@ class ShopSubState extends FlxSubState
 		add(shopItems);
 
 		var changeGender:ShopItem = new ShopItem('changeGender', 10, 10);
-		changeGender.overlapUpdate.add(item -> setSIText('Change Gender to: ' + ((item.bought) ? 'Male' : 'Female') + ')'));
+		changeGender.overlapUpdate.add(item -> setSIText('Change Gender to: ' + ((item.bought) ? 'Male' : 'Female')));
 		changeGender.onClick.add(function(item)
 		{
 			if (!SaveManager.hasItem('changeGender'))
