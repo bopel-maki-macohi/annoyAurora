@@ -127,6 +127,8 @@ class PlayState extends FlxState
 		if (SaveManager.hasItem('beer'))
 			auroraTickOffBarMaxTarget += Math.round((100 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60);
 
+		auroraTickOffBarMaxTarget += Math.round(autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS) * 100;
+
 		auroraTickOffBar.setRange(0, FlxMath.lerp(auroraTickOffBar.max, auroraTickOffBarMaxTarget, .1));
 
 		if (!transitioning)
@@ -183,7 +185,8 @@ class PlayState extends FlxState
 					}
 					else
 					{
-						autoClickFlags += 1.0;
+						if (Math.round(autoClickFlags) < Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
+							autoClickFlags += 1.0;
 						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VIOLATION_TICK}) : ${Math.round(autoClickFlags)}');
 					}
 				}
