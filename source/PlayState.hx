@@ -101,7 +101,7 @@ class PlayState extends FlxState
 					}
 					else
 					{
-						trace('Flagged as auto-clicking');
+						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VALUE})');
 					}
 				}
 			}
