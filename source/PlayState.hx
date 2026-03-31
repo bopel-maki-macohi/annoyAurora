@@ -164,6 +164,8 @@ class PlayState extends FlxState
 						addAuroraTick();
 
 						setAuroraScale(1.05, 0.95);
+
+						Constants.playRandomAuroraNoise();
 					}
 					else
 					{

@@ -1,5 +1,8 @@
+import lime.utils.Assets;
 import flixel.FlxSprite;
 import flixel.FlxG;
+
+using StringTools;
 
 class Constants
 {
@@ -24,10 +27,22 @@ class Constants
 
 	public static final ANTI_AUTOCLICK_MAX_VIOLATIONS:Float = 16.0;
 	public static final ANTI_AUTOCLICK_MIN_VIOLATIONS:Float = 4.0;
-	
+
 	public static final SHOPITEM_BOUGHT_BRIGHTNESSVALOFFSET:Float = .25;
 
 	public static final PASSEDSECONDS_INCREMENT:Float = .1;
 
 	public static final FOLDER_SCREENSHOTS:String = 'screenshots';
+
+	public static var AUDIO_AURORA_NOISES(get, never):Array<String>;
+
+	static function get_AUDIO_AURORA_NOISES():Array<String>
+	{
+		return Assets.list().filter(p -> return p.startsWith('assets/auroranoises/'));
+	}
+
+	public static function playRandomAuroraNoise()
+	{
+		FlxG.sound.play(AUDIO_AURORA_NOISES[FlxG.random.int(0, AUDIO_AURORA_NOISES.length - 1)], .25);
+	}
 }
