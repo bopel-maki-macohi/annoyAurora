@@ -224,6 +224,7 @@ class PlayState extends FlxState
 	{
 		transitioning = true;
 		secondsPasser.active = false;
+		auroraSpriteChangeTimer.active = false;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: Constants.TRANSITION_OVERLAYALPHA}, Constants.TRANSITION_SPEED, {
@@ -244,6 +245,7 @@ class PlayState extends FlxState
 	{
 		transitioning = false;
 		secondsPasser.active = true;
+		auroraSpriteChangeTimer.active = true;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
 		FlxTween.tween(transitionOverlay, {alpha: 0}, Constants.TRANSITION_SPEED, {
