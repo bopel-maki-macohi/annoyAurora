@@ -12,19 +12,25 @@ class UpgradedState extends FlxState
 		super();
 
 		this.lastVersion = lastVersion;
-        trace('lastVersion: $lastVersion');
+		trace('lastVersion: $lastVersion');
 	}
 
 	override function create()
 	{
 		super.create();
 
+		var upgradeMessage:String = 'Have fun!';
+		final upgradeMessagePath = 'assets/upgradedMessages/$lastVersion.txt';
+
+		if (Assets.exists(upgradeMessagePath))
+			upgradeMessage = Assets.getText(upgradeMessagePath);
+
 		var message = new FlxText(0, 0, 0, '', 16);
 		add(message);
 
 		message.text += 'Welcome to version ${FlxG.stage.application.meta.get('version')}!'
-			+ '\n'
-			+ Assets.getText('assets/upgradedMessages/$lastVersion.txt')
+			+ '\n\n'
+			+ upgradeMessage
 			+ '\n\nPress anything to go to gameplay lol';
 
 		message.alignment = CENTER;
