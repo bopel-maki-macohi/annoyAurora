@@ -4,7 +4,7 @@ Basically a clicker game but you have a goal that keeps getting bigger and will 
 
 ## Links
 
-N / A
+- [Itch.io](https://bopel-maki-macohi.itch.io/annoy-aurora)
 
 ## Credits
 
