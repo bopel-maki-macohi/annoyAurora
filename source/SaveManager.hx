@@ -10,7 +10,7 @@ class SaveManager extends FlxBasic
 
 	public var beerTicks:Float = 0;
 
-	public var passedSeconds:Int = 0;
+	public var passedSeconds:Float = 0;
 
 	override public function new()
 	{

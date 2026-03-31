@@ -25,7 +25,7 @@ class PlayState extends FlxState
 	public var transitioning:Bool = false;
 	public var transitionOverlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
-	public var passedSeconds:Int = 0;
+	public var passedSeconds:Float = 0;
 	public var secondsPasser:FlxTimer = new FlxTimer();
 
 	public var clickTick:Int = 0;
@@ -40,9 +40,9 @@ class PlayState extends FlxState
 		super.create();
 
 		passedSeconds = SaveManager.instance.passedSeconds;
-		secondsPasser.start(1, t ->
+		secondsPasser.start(Constants.PASSEDSECONDS_INCREMENT, t ->
 		{
-			passedSeconds++;
+			passedSeconds += Constants.PASSEDSECONDS_INCREMENT;
 			SaveManager.instance.passedSeconds = passedSeconds;
 		}, 0);
 
