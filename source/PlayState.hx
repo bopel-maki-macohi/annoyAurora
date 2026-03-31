@@ -112,7 +112,7 @@ class PlayState extends FlxState
 					if (ticksSinceLastClick >= Constants.ANTI_AUTOCLICK_VIOLATION_TICK)
 					{
 						lastAnnoyanceTick = clickTick;
-						auroraTicked += FlxG.random.float(2, 10);
+						addAuroraTick();
 					}
 					else
 					{
@@ -192,5 +192,13 @@ class PlayState extends FlxState
 		}
 
 		super.closeSubState();
+	}
+
+	public function addAuroraTick()
+	{
+		if (SaveManager.hasItem('changeGender'))
+			auroraTicked += FlxG.random.float(4, 6);
+
+		auroraTicked += FlxG.random.float(2, 10);
 	}
 }

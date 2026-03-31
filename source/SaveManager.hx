@@ -7,7 +7,10 @@ class SaveManager extends FlxBasic
 
 	public var boughtItems:Array<String> = [];
 
-	public static function hasItem(item:String):Int
+	public static function hasItem(item:String):Bool
+        return countBoughtItem(item) > 0;
+    
+	public static function countBoughtItem(item:String):Int
 	{
 		if (instance == null)
 			return 0;
