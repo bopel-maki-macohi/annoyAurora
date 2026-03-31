@@ -93,7 +93,7 @@ class ShopSubState extends FlxSubState
 		});
 		beer.bought = SaveManager.hasItem('beer');
 		shopItems.add(beer);
-		
+
 		var newgame:ShopItem = new ShopItem('newgame', changeGender.x, shopBoard.height);
 		newgame.overlapUpdate.add(item -> setSIText('New game'));
 		newgame.onClick.add(function(item)
@@ -103,7 +103,7 @@ class ShopSubState extends FlxSubState
 		});
 		newgame.y -= newgame.height / 1.5;
 		shopItems.add(newgame);
-		
+
 		var bonkingBat:ShopItem = new ShopItem('bonkingBat', changeGender.x, changeGender.y + (changeGender.height * 2));
 		bonkingBat.overlapUpdate.add(item -> setSIText('Bonking Bat ' + ((item.bought) ? '(Put away)' : '(Grab)')));
 		bonkingBat.onClick.add(function(item)
@@ -122,5 +122,24 @@ class ShopSubState extends FlxSubState
 		bonkingBat.bought = SaveManager.hasItem('bonkingBat');
 		bonkingBat.disabledWhenBought = false;
 		shopItems.add(bonkingBat);
+
+		var deage:ShopItem = new ShopItem('deage', bonkingBat.x + (bonkingBat.width * 2), bonkingBat.y);
+		deage.overlapUpdate.add(item -> setSIText(((item.bought) ? 'Re' : 'De') + 'age'));
+		deage.onClick.add(function(item)
+		{
+			if (!SaveManager.hasItem('deage'))
+			{
+				SaveManager.buyItem('deage');
+				item.bought = true;
+			}
+			else
+			{
+				SaveManager.sellItem('deage');
+				item.bought = false;
+			}
+		});
+		deage.bought = SaveManager.hasItem('deage');
+		deage.disabledWhenBought = false;
+		shopItems.add(deage);
 	}
 }
