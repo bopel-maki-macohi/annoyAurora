@@ -12,6 +12,7 @@ class UpgradedState extends FlxState
 		super();
 
 		this.lastVersion = lastVersion;
+        trace('lastVersion: $lastVersion');
 	}
 
 	override function create()
