@@ -119,7 +119,7 @@ class PlayState extends FlxState
 		transitioning = true;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
-		FlxTween.tween(transitionOverlay, {alpha: 1}, 1, {
+		FlxTween.tween(transitionOverlay, {alpha: 0.6}, 1, {
 			ease: FlxEase.sineInOut
 		});
 
@@ -136,7 +136,7 @@ class PlayState extends FlxState
 		transitioning = false;
 
 		FlxTween.cancelTweensOf(transitionOverlay);
-		FlxTween.tween(transitionOverlay, {alpha: 0.6}, 1, {
+		FlxTween.tween(transitionOverlay, {alpha: 0}, 1, {
 			ease: FlxEase.sineInOut
 		});
 
