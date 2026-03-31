@@ -68,6 +68,16 @@ class SaveManager extends FlxBasic
 			f(field);
 	}
 
+	public static function newGame()
+	{
+		if (instance == null)
+			return;
+		
+		instance.boughtItems = [];
+		instance.beerTicks = 0;
+		instance.passedSeconds = 0;
+	}
+
 	public static function getEnding(ending:String)
 	{
 		if (instance == null)

@@ -7,7 +7,7 @@ class WinState extends FlxState
 {
 	public var sprite:FlxSprite = new FlxSprite();
 
-    public var text:FlxText = new FlxText();
+	public var text:FlxText = new FlxText();
 
 	override function create()
 	{
@@ -19,15 +19,34 @@ class WinState extends FlxState
 		sprite.screenCenter();
 		add(sprite);
 
-        text.size = 16;
-        text.text = 'Congrats! You are... kinda an asshole...';
-        add(text);
-        text.screenCenter();
-        text.y = 10;
+		text.size = 16;
 
-        if (!SaveManager.hasEnding(ending))
-            SaveManager.getEnding(ending);
+		switch (ending)
+		{
+			default:
+				text.text = 'Congrats! You are... kinda an asshole...';
+		}
 
-        FlxG.mouse.visible = false;
+		text.text += '\n\nPress anything to do it again, you jerk.';
+
+		add(text);
+		text.screenCenter();
+		text.y = 10;
+
+		if (!SaveManager.hasEnding(ending))
+			SaveManager.getEnding(ending);
+
+		FlxG.mouse.visible = false;
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (FlxG.keys.justReleased.ANY)
+		{
+            SaveManager.newGame();
+			FlxG.switchState(() -> new PlayState());
+		}
 	}
 }

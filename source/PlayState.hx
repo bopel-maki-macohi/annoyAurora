@@ -74,6 +74,8 @@ class PlayState extends FlxState
 		add(transitionOverlay);
 
 		add(shopBtn);
+
+		FlxG.mouse.visible = true;
 	}
 
 	public function setAuroraScale(x:Float, y:Float)
