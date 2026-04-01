@@ -28,6 +28,10 @@ class Main extends Sprite
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(lime.system.System.documentsDirectory));
 		#end
 
+		#if html5
+		UpdateUtil.latestVersion = currentVersion;
+		#end
+
 		addChild(new FlxGame(0, 0, InitState));
 	}
 }
