@@ -17,6 +17,7 @@ using StringTools;
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
+
 	public static var auroraSpriteChangeTimer:FlxTimer;
 
 	public var auroraTicked:Float = 0.0;
@@ -64,7 +65,7 @@ class PlayState extends FlxState
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 		aurora.loadGraphic('assets/aurora.png');
-		
+
 		auroraSpriteChangeTimer = new FlxTimer();
 		auroraSpriteChangeTimer.start(1, t ->
 		{
@@ -139,7 +140,7 @@ class PlayState extends FlxState
 		if (SaveManager.hasItem('deage'))
 			auroraTickOffBarMaxTarget += 50;
 
-		auroraTickOffBarMaxTarget += Math.round(autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS) * 100;
+		auroraTickOffBarMaxTarget += autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS * 100;
 
 		auroraTickOffBar.setRange(0, FlxMath.lerp(auroraTickOffBar.max, auroraTickOffBarMaxTarget, .1));
 
@@ -197,8 +198,7 @@ class PlayState extends FlxState
 					}
 					else
 					{
-						if (Math.round(autoClickFlags) < Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS)
-							autoClickFlags += 1.0;
+						autoClickFlags += 1.0;
 						trace(' | Flagged as auto-clicking (< ${Constants.ANTI_AUTOCLICK_VIOLATION_TICK}) : ${Math.round(autoClickFlags)}');
 					}
 				}
