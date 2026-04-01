@@ -167,8 +167,6 @@ class WinState extends FlxState
 		if (!SaveManager.hasEnding(ending) && earnedIt)
 			SaveManager.getEnding(ending);
 
-		MouseManager.instance.visible = false;
-
 		SaveManager.newGame();
 	}
 
