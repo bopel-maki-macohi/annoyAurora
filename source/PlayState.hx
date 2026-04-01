@@ -197,7 +197,7 @@ class PlayState extends FlxState
 						#if AURORA_NOISES_DONT_SOUND_LIKE_SEX
 						Constants.playRandomAuroraNoise();
 						#else
-						auroratempnoise.pitch = FlxG.random.float(1, 10);
+						// auroratempnoise.pitch = FlxG.random.float(1, 10);
 						auroratempnoise.play();
 						#end
 					}
