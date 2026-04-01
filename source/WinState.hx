@@ -131,7 +131,21 @@ class WinState extends FlxState
 				text.text += 'You\'re... kinda just an asshole now...';
 		}
 
-		text.text += '\n\nPress ENTER to do it again, you jerk.';
+		text.text += '\n\nPress ENTER to do it again';
+
+		var notajerk = [
+			'young',
+			'young-female',
+
+			'young-thehardway',
+			'young-female-thehardway',
+			
+			'young-first',
+			'young-female-first',
+		];
+
+		if (!notajerk.contains(ending))
+			text.text += ', you jerk.';
 
 		if (!earnedIt)
 			text.text += '\nAnd this time, don\'t cheat.';
