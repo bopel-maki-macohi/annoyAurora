@@ -24,3 +24,5 @@
 - The Anti-Autoclicker goal penalty is now gradual
 - You can now exceed max Autoclicker violations again
 - The win state sprite is shifted down
+- Aurora's tolerance drains now at the same rate as aurora's annoyance
+- The temp noise that plays when you click on aurora now has a random pitch

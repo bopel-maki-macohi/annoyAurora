@@ -1,5 +1,6 @@
 package;
 
+import flixel.sound.FlxSound;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -41,6 +42,8 @@ class PlayState extends FlxState
 	public var ticksSinceLastClick:Int = 0;
 	public var lastAnnoyanceTick:Int = 0;
 	public var autoClickFlags:Float = 1.0;
+
+	public var auroratempnoise:FlxSound = new FlxSound().loadEmbedded('assets/auroratempnoise.wav');
 
 	override public function create()
 	{
@@ -94,6 +97,8 @@ class PlayState extends FlxState
 		add(shopBtn);
 
 		MouseManager.instance.visible = true;
+
+		auroratempnoise.volume = .25;
 	}
 
 	public function setAuroraScale(x:Float, y:Float)
@@ -153,6 +158,7 @@ class PlayState extends FlxState
 			ticksSinceLastClick = clickTick - lastAnnoyanceTick;
 
 			auroraTicked = FlxMath.lerp(auroraTicked, 0, auroraTickedLerpRatio());
+			auroraTolerance = FlxMath.lerp(auroraTolerance, 0, auroraTickedLerpRatio() * 2);
 
 			#if !DISABLE_VICTORY
 			if (auroraTicked >= Math.round(auroraTickOffBarMaxTarget))
@@ -191,7 +197,8 @@ class PlayState extends FlxState
 						#if AURORA_NOISES_DONT_SOUND_LIKE_SEX
 						Constants.playRandomAuroraNoise();
 						#else
-						FlxG.sound.play('assets/auroratempnoise.wav', .25);
+						auroratempnoise.pitch = FlxG.random.float(1, 10);
+						auroratempnoise.play();
 						#end
 					}
 					else
@@ -326,7 +333,7 @@ class PlayState extends FlxState
 			denominator += 16;
 
 		if (SaveManager.hasItem('deage'))
-			denominator -= 12;
+			denominator -= 16;
 
 		return 1 / denominator;
 	}
