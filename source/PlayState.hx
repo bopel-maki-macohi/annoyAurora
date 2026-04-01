@@ -142,6 +142,8 @@ class PlayState extends FlxState
 			auroraTickOffBarMaxTarget += Math.round((100 * SaveManager.countBoughtItem('beer')) + SaveManager.instance.beerTicks * 1 / 60);
 		if (SaveManager.hasItem('bonkingBat'))
 			auroraTickOffBarMaxTarget += 25;
+		if (SaveManager.hasItem('deage'))
+			auroraTickOffBarMaxTarget += 25;
 
 		auroraTickOffBarMaxTarget += autoClickFlags / Constants.ANTI_AUTOCLICK_MAX_VIOLATIONS * 100;
 
