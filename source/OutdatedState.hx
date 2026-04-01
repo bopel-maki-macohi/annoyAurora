@@ -1,3 +1,4 @@
+import flixel.util.FlxTimer;
 import lime.utils.Assets;
 import flixel.text.FlxText;
 import flixel.FlxG;
@@ -23,6 +24,11 @@ class OutdatedState extends FlxState
 		MouseManager.instance.visible = false;
 
 		seen = true;
+
+		FlxTimer.wait(10, function()
+		{
+			InitState.proceed();
+		});
 	}
 
 	override function update(elapsed:Float)

@@ -33,7 +33,7 @@ class UpgradedState extends FlxState
 		message.text += 'Welcome to version %version%!'
 			+ '\n\n'
 			+ upgradeMessage
-			+ '\n\nPress ENTER to go to gameplay lol';
+			+ '\n\nPress ENTER or click the screen to go to gameplay lol';
 
 		message.text = message.text.replace('%version%', Main.currentVersion);
 
@@ -47,7 +47,7 @@ class UpgradedState extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.ENTER)
+		if (FlxG.keys.justReleased.ENTER || MouseManager.instance.justPressed)
 			InitState.proceed();
 	}
 }

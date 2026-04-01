@@ -131,7 +131,7 @@ class WinState extends FlxState
 				text.text += 'You\'re... kinda just an asshole now...';
 		}
 
-		text.text += '\n\nPress ENTER to do it again';
+		text.text += '\n\nPress ENTER (or press the screen) it to do it again';
 
 		var notajerk = [
 			'young',
@@ -139,13 +139,14 @@ class WinState extends FlxState
 
 			'young-thehardway',
 			'young-female-thehardway',
-			
+
 			'young-first',
 			'young-female-first',
 		];
 
 		if (!notajerk.contains(ending))
-			text.text += ', you jerk.';
+			text.text += ', you jerk';
+		text.text += '.';
 
 		if (!earnedIt)
 			text.text += '\nAnd this time, don\'t cheat.';
@@ -175,9 +176,7 @@ class WinState extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.ENTER)
-		{
+		if (FlxG.keys.justReleased.ENTER || MouseManager.instance.justPressed)
 			FlxG.switchState(() -> new PlayState());
-		}
 	}
 }
