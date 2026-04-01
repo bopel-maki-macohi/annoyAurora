@@ -29,4 +29,7 @@
 - Fixed miscarriage typo in "Abuse (Female)" ending alt text
 - You now can wait 10 seconds in the outdated state and it will proceed automatically
 - You can now tap the screen on the upgraded screen to proceed
+    - The mouse is no longer invisible in the upgraded screen
 - You can now tap the screen 5 times on the win screen to proceed
+- You can now tap the screen on the outdated screen to proceed
+    - The mouse is no longer invisible in the outdated screen
