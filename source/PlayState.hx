@@ -134,7 +134,7 @@ class PlayState extends FlxState
 		if (auroraTolerance < 0)
 			auroraTolerance = 0;
 
-		auroraTickOffBarMaxTarget = 50 + Math.round(auroraTolerance);
+		auroraTickOffBarMaxTarget = 45 + Math.round(auroraTolerance);
 
 		if (SaveManager.hasItem('changeGender'))
 			auroraTickOffBarMaxTarget += 50;
