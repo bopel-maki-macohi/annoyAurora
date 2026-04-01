@@ -65,8 +65,6 @@ class PlayState extends FlxState
 
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
-		aurora.loadGraphic('assets/aurora.png');
-
 		auroraSpriteChangeTimer = new FlxTimer();
 		auroraSpriteChangeTimer.start(1, t ->
 		{
@@ -75,6 +73,7 @@ class PlayState extends FlxState
 			else
 				aurora.loadGraphic('assets/aurora.png');
 		}, 0);
+		auroraSpriteChangeTimer.onComplete(auroraSpriteChangeTimer);
 
 		auroraTickOffBar = new FlxBar(0, 10, LEFT_TO_RIGHT, Constants.BAR_WIDTH, Constants.BAR_HEIGHT, this, 'auroraTicked', 0, 100);
 		auroraTickOffBar.screenCenter(X);
