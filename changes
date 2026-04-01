@@ -1,1 +1,4 @@
-Added upgrade messages
+Upgrade message stuff mostly
+
+- An upgrade message being "%skip%" now skips the upgrade screen
+- "%skip%" is now the default upgrade message

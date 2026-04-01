@@ -21,7 +21,7 @@ class UpgradedState extends FlxState
 	{
 		super.create();
 
-		var upgradeMessage:String = 'Have fun!';
+		var upgradeMessage:String = '%ski;p%';
 		final upgradeMessagePath = 'assets/upgradedMessages/$lastVersion.txt';
 
 		if (Assets.exists(upgradeMessagePath))
@@ -30,12 +30,12 @@ class UpgradedState extends FlxState
 		var message = new FlxText(0, 0, 0, '', 16);
 		add(message);
 
-		message.text += 'Welcome to version %version%!'
-			+ '\n\n'
-			+ upgradeMessage
-			+ '\n\nPress ENTER or click the screen to go to gameplay lol';
+		message.text += 'Welcome to version %version%!' + '\n\n' + upgradeMessage + '\n\nPress ENTER or click the screen to go to gameplay lol';
 
 		message.text = message.text.replace('%version%', Main.currentVersion);
+
+		if (upgradeMessage == '%skip%')
+			InitState.proceed();
 
 		message.alignment = CENTER;
 		message.screenCenter();
