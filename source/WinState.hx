@@ -131,7 +131,7 @@ class WinState extends FlxState
 				text.text += 'You\'re... kinda just an asshole now...';
 		}
 
-		text.text += '\n\nPress ENTER (or press the screen) it to do it again';
+		text.text += '\n\nPress ENTER (or press the screen 5 times) it to do it again';
 
 		var notajerk = [
 			'young',
@@ -172,11 +172,16 @@ class WinState extends FlxState
 		SaveManager.newGame();
 	}
 
+	public var clicks:Int = 0;
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.ENTER || MouseManager.instance.justPressed)
+		if (MouseManager.instance.justPressed)
+			clicks++;
+
+		if (FlxG.keys.justReleased.ENTER || clicks >= 5)
 			FlxG.switchState(() -> new PlayState());
 	}
 }
