@@ -1,0 +1,22 @@
+- Added "deage" shop item:
+  - Adds 8 new endings:
+    - "Young" and "Young (Female)"
+    - "Young (Drunk)" and "Young (Drunk Female)"
+        - You require beer
+
+    - "Young (First)" and "Young (Female First)"
+        - Only if you don't have any of the following:
+            - "Young"
+            - "Young (Female)"
+            - "Young (Drunk)"
+            - "Young (Drunk Female)"
+            - "Young (First)"
+            - "Young (Female First)"
+        - And if you are about to unlock:
+            - "Young"
+            - "Young (Female)"
+
+    - "Young (The Hard Way)" && "Young (Female The Hard Way)"
+        - Only if you don't have, but are about to unlock the following:
+            - "Young"
+            - "Young (Female)"

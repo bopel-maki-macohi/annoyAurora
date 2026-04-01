@@ -3,6 +3,8 @@ import flixel.text.FlxText;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
+using StringTools;
+
 class WinState extends FlxState
 {
 	public var sprite:FlxSprite = new FlxSprite();
@@ -39,11 +41,29 @@ class WinState extends FlxState
 		if (SaveManager.hasItem('bonkingBat') || winstateDefineRandom())
 			ending = 'abuse';
 
+		if (SaveManager.hasItem('deage') || winstateDefineRandom())
+		{
+			ending = 'young';
+
+			if (SaveManager.hasItem('beer') || winstateDefineRandom())
+				ending += '-drunk';
+		}
+
 		if (SaveManager.hasItem('changeGender') || winstateDefineRandom())
 			if (ending == 'normal')
 				ending = 'female';
 			else
 				ending += '-female';
+
+		if (ending.startsWith('young') && !ending.contains('-drunk'))
+			if (!SaveManager.hasEnding('young') && !SaveManager.hasEnding('young-female'))
+				if (!SaveManager.hasEnding('young-drunk') && !SaveManager.hasEnding('young-drunk-female'))
+				{
+					if (!SaveManager.hasEnding('young-first') && !SaveManager.hasEnding('young-female-first'))
+						ending += '-first';
+				}
+				else
+					ending += '-thehardway';
 
 		sprite.loadGraphic('assets/endings/$ending.png');
 		add(sprite);
@@ -53,6 +73,21 @@ class WinState extends FlxState
 		text.text = 'Congrats!\nYou won in ${SaveManager.instance.passedSeconds} seconds!\n\n';
 		switch (ending)
 		{
+			case 'young-drunk':
+				text.text += '<aurora>"I hate how touchy you are when drunk..."<aurora>';
+			case 'young-drunk-female':
+				text.text += '<aurora>"I HATE how touchy you are when drunk..."<aurora>';
+
+			case 'young-first', 'young-female-first':
+				text.text += 'Does this count as a good ending? She can\'t do anything...';
+
+			case 'young-thehardway', 'young-female-thehardway':
+				text.text += 'I think you made it worse...';
+				sprite.loadGraphic('assets/endings/${ending.replace('-thehardway', '')}.png');
+
+			case 'young', 'young-female':
+				text.text += 'SHE\'S FERAL NOW';
+
 			case 'abuse-female':
 				sprite.scale.set(.5, .5);
 				sprite.updateHitbox();
@@ -108,7 +143,10 @@ class WinState extends FlxState
 		text.screenCenter();
 		text.y = 10;
 
-		text.applyMarkup(text.text, [new FlxTextFormatMarkerPair(new FlxTextFormat(0x32825E), '<nicom>')]);
+		text.applyMarkup(text.text, [
+			new FlxTextFormatMarkerPair(new FlxTextFormat(0x32825E), '<nicom>'),
+			new FlxTextFormatMarkerPair(new FlxTextFormat(0x63FFBA), '<aurora>'),
+		]);
 
 		if (!SaveManager.hasEnding(ending) && earnedIt)
 			SaveManager.getEnding(ending);
