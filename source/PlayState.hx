@@ -17,7 +17,7 @@ using StringTools;
 class PlayState extends FlxState
 {
 	public var aurora:FlxSprite = new FlxSprite();
-	public static var auroraSpriteChangeTimer:FlxTimer = new FlxTimer();
+	public static var auroraSpriteChangeTimer:FlxTimer;
 
 	public var auroraTicked:Float = 0.0;
 	public var auroraTickOffBar:FlxBar;
@@ -64,6 +64,8 @@ class PlayState extends FlxState
 		// aurora.makeGraphic(256, 512, FlxColor.LIME);
 		// aurora.makeGraphic(256, 512, FlxColor.RED);
 		aurora.loadGraphic('assets/aurora.png');
+		
+		auroraSpriteChangeTimer = new FlxTimer();
 		auroraSpriteChangeTimer.start(1, t ->
 		{
 			if (SaveManager.hasItem('deage'))
