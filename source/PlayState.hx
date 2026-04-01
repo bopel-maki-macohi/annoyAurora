@@ -43,8 +43,6 @@ class PlayState extends FlxState
 	public var lastAnnoyanceTick:Int = 0;
 	public var autoClickFlags:Float = 1.0;
 
-	public var auroratempnoise:FlxSound = new FlxSound().loadEmbedded('assets/auroratempnoise.wav');
-
 	override public function create()
 	{
 		super.create();
@@ -97,8 +95,6 @@ class PlayState extends FlxState
 		add(shopBtn);
 
 		MouseManager.instance.visible = true;
-
-		auroratempnoise.volume = .25;
 	}
 
 	public function setAuroraScale(x:Float, y:Float)
@@ -199,8 +195,7 @@ class PlayState extends FlxState
 						#if AURORA_NOISES_DONT_SOUND_LIKE_SEX
 						Constants.playRandomAuroraNoise();
 						#else
-						// auroratempnoise.pitch = FlxG.random.float(1, 10);
-						auroratempnoise.play();
+						FlxG.sound.play('assets/auroratempnoise.wav', .25);
 						#end
 					}
 					else
