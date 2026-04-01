@@ -151,6 +151,7 @@ class WinState extends FlxState
 			text.text += '\nAnd this time, don\'t cheat.';
 
 		sprite.screenCenter();
+		sprite.y += sprite.height / 4;
 
 		add(text);
 		text.alignment = CENTER;
