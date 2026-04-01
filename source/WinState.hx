@@ -98,7 +98,7 @@ class WinState extends FlxState
 					text.text += 'In the nicest way possible.\nI wish you die single.';
 				}
 				else if (FlxG.random.bool(8))
-					text.text += 'I wish you a miscarrage.';
+					text.text += 'I wish you a miscarriage.';
 				else if (FlxG.random.bool(1))
 					text.text += '<nicom>"Ow."<nicom>';
 				else
