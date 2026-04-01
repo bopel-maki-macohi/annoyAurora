@@ -28,6 +28,7 @@ class InitState extends FlxState
 
 		#if html5
 		SaveManager.instance.lastVersion = Main.currentVersion;
+		UpdateUtil.latestVersion = Main.currentVersion;
 		#end
 
 		final lv = SaveManager.instance.lastVersion;
