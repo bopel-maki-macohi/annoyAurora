@@ -1,49 +1,28 @@
-import flixel.util.FlxSave;
 import lime.app.Application;
 import flixel.FlxG;
 import flixel.FlxBasic;
 
 class SaveManager extends FlxBasic
 {
-	public static var legacySave:FlxSave = new FlxSave();
-
 	public static var instance:SaveManager = null;
 
-	public static var saveSuffix(default, set):String = '';
-
-	static function set_saveSuffix(newSS:String):String
-	{
-		if (instance == null)
-		{
-			legacySave.data.saveSuffix = saveSuffix;
-			return saveSuffix;
-		}
-
-		legacySave.data.saveSuffix = newSS;
-		instance.loadSave(newSS);
-		return newSS;
-	}
-
 	public var boughtItems:Array<String> = [];
+
 	public var beerTicks:Float = 0;
+
 	public var passedSeconds:Float = 0;
+
 	public var endings:Array<String> = [];
+
 	public var auroraTolerance:Float = 0;
+
+	public var lastVersion:String = '0.0.0';
 
 	override public function new()
 	{
 		super();
-	}
 
-	public function loadSave(saveSuffix:String)
-	{
-		if (saveSuffix.length == 0 || saveSuffix == null)
-		{
-			trace('Blank save suffix... wtf?');
-			FlxG.save.bind('AnnoyAurora', 'Maki');
-		}
-		else
-			FlxG.save.bind('AnnoyAurora-$saveSuffix', 'Maki');
+		FlxG.save.bind('AnnoyAurora', 'Maki');
 
 		#if !CLEAR_SAVE
 		loadData();
