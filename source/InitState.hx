@@ -1,5 +1,3 @@
-import flixel.util.FlxSave;
-import haxe.Serializer;
 import lime.app.Application;
 import flixel.FlxG;
 import flixel.FlxState;
@@ -13,26 +11,21 @@ class InitState extends FlxState
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
 
-		SaveManager.dataSave.bind('AnnoyAurora', 'Maki');
+		SaveManager.legacySave.bind('AnnoyAurora', 'Maki');
 
-		if (SaveManager.dataSave.data.lastVersion != null)
+		if (SaveManager.legacySave.data.lastVersion != null)
 		{
-			trace('Legacy Save');
+			trace('Legacy Save : ${SaveManager.legacySave}');
 
-			final legacySave:FlxSave = new FlxSave();
-			legacySave.bind('AnnoyAurora-Legacy', 'Maki');
-			legacySave.mergeDataFrom('AnnoyAurora', 'Maki');
+			SaveManager.instance.saveData();
+			var legacySaveData = SaveManager.legacySave.data;
 
-			FlxG.save.bind('AnnoyAurora', 'Maki');
-			FlxG.save.data.lastVersion = null;
-			FlxG.save.close();
-
+			SaveManager.legacySave.bind('AnnoyAurora-Legacy', 'Maki');
+			for (field in Reflect.fields(legacySaveData))
+				Reflect.setField(FlxG.save.data, field, Reflect.field(legacySaveData, field));
+			SaveManager.legacySave.bind('AnnoyAurora', 'Maki');
+			
 			SaveManager.saveSuffix = 'Legacy';
-		}
-		else
-		{
-			trace('Save : ${SaveManager.dataSave.data.saveSuffix}');
-			SaveManager.saveSuffix = SaveManager.dataSave.data.saveSuffix;
 		}
 
 		ScreenshotPlugin.init();
