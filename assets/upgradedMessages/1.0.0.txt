@@ -1,3 +1,0 @@
-Inbetween 1.0 and %version% there was a patch fixing the difficulty!
-
-Sorry about 1.0's difficulty :(

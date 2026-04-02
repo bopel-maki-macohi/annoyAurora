@@ -1,1 +1,3 @@
-- HTML5 doesn't show the update screen when there's no update
+- Added support for multiple saves
+    - Removed Upgraded screen
+    - Migration support has been done

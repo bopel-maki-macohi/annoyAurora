@@ -11,6 +11,23 @@ class InitState extends FlxState
 		SaveManager.instance = new SaveManager();
 		FlxG.plugins.addPlugin(SaveManager.instance);
 
+		SaveManager.legacySave.bind('AnnoyAurora', 'Maki');
+
+		if (SaveManager.legacySave.data.lastVersion != null)
+		{
+			trace('Legacy Save : ${SaveManager.legacySave}');
+
+			SaveManager.instance.saveData();
+			var legacySaveData = SaveManager.legacySave.data;
+
+			SaveManager.legacySave.bind('AnnoyAurora-Legacy', 'Maki');
+			for (field in Reflect.fields(legacySaveData))
+				Reflect.setField(FlxG.save.data, field, Reflect.field(legacySaveData, field));
+			SaveManager.legacySave.bind('AnnoyAurora', 'Maki');
+			
+			SaveManager.saveSuffix = 'Legacy';
+		}
+
 		ScreenshotPlugin.init();
 
 		MouseManager.instance = new MouseManager();
@@ -27,27 +44,16 @@ class InitState extends FlxState
 		UpdateUtil.checkForUpdate();
 
 		#if html5
-		SaveManager.instance.lastVersion = Main.currentVersion;
 		UpdateUtil.latestVersion = Main.currentVersion;
 		#end
 
-		final lv = SaveManager.instance.lastVersion;
-
-		if (lv == Main.currentVersion)
-			proceed();
-		else
-		{
-			trace('JUST UPGRADED!');
-			FlxG.switchState(() -> new UpgradedState(lv));
-		}
-
-		SaveManager.instance.lastVersion = Main.currentVersion;
+		proceed();
 	}
 
 	public static function proceed()
 	{
 		if (!OutdatedState.seen)
-			if (UpdateUtil.latestVersion != SaveManager.instance.lastVersion)
+			if (UpdateUtil.latestVersion != Main.currentVersion)
 			{
 				FlxG.switchState(() -> new OutdatedState());
 				return;
@@ -55,8 +61,10 @@ class InitState extends FlxState
 
 		#if WINSTATE
 		FlxG.switchState(() -> new WinState(true));
-		#else
+		#elseif PLAYSTATE
 		FlxG.switchState(() -> new PlayState());
+		#else
+		FlxG.switchState(() -> new SavePageState());
 		#end
 	}
 
