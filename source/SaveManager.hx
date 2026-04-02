@@ -5,7 +5,7 @@ import flixel.FlxBasic;
 
 class SaveManager extends FlxBasic
 {
-	public static var legacySave:FlxSave = new FlxSave();
+	public static var dataSave:FlxSave = new FlxSave();
 
 	public static var instance:SaveManager = null;
 
@@ -15,11 +15,11 @@ class SaveManager extends FlxBasic
 	{
 		if (instance == null)
 		{
-			legacySave.data.saveSuffix = saveSuffix;
+			dataSave.data.saveSuffix = saveSuffix;
 			return saveSuffix;
 		}
 
-		legacySave.data.saveSuffix = newSS;
+		dataSave.data.saveSuffix = newSS;
 		instance.loadSave(newSS);
 		return newSS;
 	}
@@ -30,6 +30,8 @@ class SaveManager extends FlxBasic
 	public var endings:Array<String> = [];
 	public var auroraTolerance:Float = 0;
 
+	public var saveName:String = '';
+
 	override public function new()
 	{
 		super();
@@ -37,13 +39,11 @@ class SaveManager extends FlxBasic
 
 	public function loadSave(saveSuffix:String)
 	{
+		saveName = 'AnnoyAurora';
 		if (saveSuffix.length == 0 || saveSuffix == null)
-		{
 			trace('Blank save suffix... wtf?');
-			FlxG.save.bind('AnnoyAurora', 'Maki');
-		}
 		else
-			FlxG.save.bind('AnnoyAurora-$saveSuffix', 'Maki');
+			saveName += '-$saveSuffix';
 
 		#if !CLEAR_SAVE
 		loadData();
@@ -54,6 +54,7 @@ class SaveManager extends FlxBasic
 	{
 		saveData();
 
+		SaveManager.dataSave.flush();
 		FlxG.save.flush();
 	}
 
@@ -67,7 +68,7 @@ class SaveManager extends FlxBasic
 				Reflect.setField(this, f, saveField);
 		});
 
-		trace('Loaded savedata: ${FlxG.save.data}');
+		trace('Loaded savedata from "$saveName": ${FlxG.save.data}');
 	}
 
 	public function saveData()
@@ -77,19 +78,13 @@ class SaveManager extends FlxBasic
 			Reflect.setField(FlxG.save.data, f, Reflect.field(this, f));
 		});
 
-		trace('Saved savedata: ${FlxG.save.data}');
+		if (saveName.length > 0 && saveName != null)
+			trace('Saved savedata to "$saveName": ${FlxG.save.data}');
 	}
 
 	public function saveFieldFunction(f:String->Void)
 	{
-		for (field in [
-			'boughtItems',
-			'beerTicks',
-			'passedSeconds',
-			'endings',
-			'auroraTolerance',
-			'lastVersion'
-		])
+		for (field in ['boughtItems', 'beerTicks', 'passedSeconds', 'endings', 'auroraTolerance'])
 			f(field);
 	}
 
