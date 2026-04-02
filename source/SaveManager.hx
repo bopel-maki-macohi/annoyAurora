@@ -7,16 +7,10 @@ class SaveManager extends FlxBasic
 	public static var instance:SaveManager = null;
 
 	public var boughtItems:Array<String> = [];
-
 	public var beerTicks:Float = 0;
-
 	public var passedSeconds:Float = 0;
-
 	public var endings:Array<String> = [];
-
 	public var auroraTolerance:Float = 0;
-
-	public var lastVersion:String = '0.0.0';
 
 	override public function new()
 	{
@@ -66,8 +60,7 @@ class SaveManager extends FlxBasic
 			'beerTicks',
 			'passedSeconds',
 			'endings',
-			'auroraTolerance',
-			'lastVersion'
+			'auroraTolerance'
 		])
 			f(field);
 	}

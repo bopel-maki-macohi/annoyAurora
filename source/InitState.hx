@@ -27,27 +27,16 @@ class InitState extends FlxState
 		UpdateUtil.checkForUpdate();
 
 		#if html5
-		SaveManager.instance.lastVersion = Main.currentVersion;
 		UpdateUtil.latestVersion = Main.currentVersion;
 		#end
 
-		final lv = SaveManager.instance.lastVersion;
-
-		if (lv == Main.currentVersion)
 			proceed();
-		else
-		{
-			trace('JUST UPGRADED!');
-			FlxG.switchState(() -> new UpgradedState(lv));
-		}
-
-		SaveManager.instance.lastVersion = Main.currentVersion;
 	}
 
 	public static function proceed()
 	{
 		if (!OutdatedState.seen)
-			if (UpdateUtil.latestVersion != SaveManager.instance.lastVersion)
+			if (UpdateUtil.latestVersion != Main.currentVersion)
 			{
 				FlxG.switchState(() -> new OutdatedState());
 				return;
